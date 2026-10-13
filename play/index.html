@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chomp &ndash; Mridul Saravanan</title>
+<meta name="description" content="Chomp: a small maze game. Eat the dots, avoid four ghosts, clear the level.">
+<link rel="canonical" href="https://mridulsaravanan.com/play/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%230E1024%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Arial%27 font-weight=%27700%27 font-size=%2715%27 text-anchor=%27middle%27 fill=%27%23FFB45E%27%3EMS%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F6FB; --surface:#FFFFFF; --ink:#10122B; --ink2:#454A6B; --muted:#757A99;
+  --line:#E3E5F1; --cobalt:#3245FF; --cobalt-d:#2433D6; --cobalt-l:#E8EAFF; --violet:#7448FF; --sun:#FFC53D;
+  --display:"Bricolage Grotesque","Figtree",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:8px}
+.top{background:var(--cobalt);color:#fff;padding:22px 16px 120px;position:relative;overflow:hidden}
+.top::after{content:"";position:absolute;right:-90px;top:-90px;width:260px;height:260px;border-radius:50%;background:var(--violet);opacity:.75}
+.top .in{max-width:560px;margin:0 auto;position:relative;z-index:1}
+.back{display:inline-flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;color:#fff;opacity:.92}
+.back:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+h1{font:800 clamp(2.2rem,7vw,3.2rem)/1 var(--display);letter-spacing:-.035em;margin:28px 0 8px}
+.top p{margin:0;opacity:.9;max-width:30em}
+.arcade{max-width:520px;margin:-92px auto 56px;padding:18px 18px 16px;border-radius:28px;background:var(--surface);border:1px solid var(--line);box-shadow:0 40px 90px -40px rgba(50,69,255,.55);position:relative;z-index:2}
+.wrap-arcade{padding:0 16px}
+.hud{display:flex;justify-content:space-between;gap:8px;padding:2px 6px 12px;color:var(--muted);font-size:.9rem}
+.hud b{color:var(--ink);font:700 1.05rem/1 var(--display);margin-left:6px;font-variant-numeric:tabular-nums}
+#chomp{display:block;width:100%;height:auto;aspect-ratio:19/21;border-radius:16px;background:#0A0C1C;touch-action:none;cursor:pointer}
+.pad{display:none;grid-template-columns:repeat(3,60px);grid-template-rows:repeat(2,52px);gap:8px;justify-content:center;margin-top:14px}
+.pad button{border:1px solid var(--line);background:var(--cobalt-l);color:var(--ink);border-radius:14px;font-size:1.1rem;cursor:pointer;touch-action:manipulation}
+.pad button:active{background:var(--line)}
+.pad .up{grid-column:2;grid-row:1}.pad .left{grid-column:1;grid-row:2}.pad .down{grid-column:2;grid-row:2}.pad .right{grid-column:3;grid-row:2}
+.keys{text-align:center;color:var(--muted);font:500 .8rem/1.4 var(--mono);margin:12px 0 0}
+@media (pointer:coarse){.pad{display:grid}.keys{display:none}}
+footer{text-align:center;color:var(--muted);font-size:.9rem;padding:0 16px 40px}
+footer a{color:var(--cobalt-d);font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="in">
+    <a class="back" href="/">&larr; mridulsaravanan.com</a>
+    <h1>Chomp</h1>
+    <p>Eat every dot, avoid the four ghosts, and use a power pellet to turn the tables.</p>
+  </div>
+</header>
+<main class="wrap-arcade">
+  <div class="arcade">
+    <div class="hud">
+      <span>Score<b id="c-score">0</b></span>
+      <span>Best<b id="c-best">0</b></span>
+      <span>Lives<b id="c-lives">3</b></span>
+      <span>Level<b id="c-level">1</b></span>
+    </div>
+    <canvas id="chomp" width="456" height="504" aria-label="Chomp, a maze game. Click it to start, then use the arrow keys, WASD or swipes to move."></canvas>
+    <div class="pad">
+      <button class="up" data-chomp="up" aria-label="Up">&#9650;</button>
+      <button class="left" data-chomp="left" aria-label="Left">&#9664;</button>
+      <button class="down" data-chomp="down" aria-label="Down">&#9660;</button>
+      <button class="right" data-chomp="right" aria-label="Right">&#9654;</button>
+    </div>
+    <p class="keys">Arrow keys or WASD</p>
+  </div>
+</main>
+<footer><a href="/#/projects/chomp">About this project</a></footer>
+<script src="chomp.js" defer></script>
+</body>
+</html>
