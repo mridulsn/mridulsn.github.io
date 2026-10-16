@@ -1,0 +1,3 @@
+me.png: "Man raising hand: medium skin tone" from Google Noto Emoji 3D,
+https://github.com/googlefonts/noto-emoji (3D/png/512/emoji_u1f64b_1f3fd_200d_2642.png),
+image resources licensed under the Apache License 2.0 (LICENSE-Apache-2.0.txt). Resized to 320 px.

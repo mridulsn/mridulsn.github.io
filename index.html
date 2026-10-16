@@ -3,774 +3,333 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mridul Saravanan &ndash; projects, AI experiments and findings</title>
-<meta name="description" content="Mridul Saravanan explores AI, tests how it behaves, and documents what he learns: projects, an AI lab, findings and learning notes.">
+<title>Mridul Saravanan</title>
+<meta name="description" content="Hi, I'm Mridul. This is my page of ideas and works I've vibecoded.">
 <meta property="og:title" content="Mridul Saravanan">
-<meta property="og:description" content="I explore AI, test how it behaves, and document what I learn.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://mridulsaravanan.com/">
-<link rel="canonical" href="https://mridulsaravanan.com/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%230E1024%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Arial%27 font-weight=%27700%27 font-size=%2715%27 text-anchor=%27middle%27 fill=%27%23FFB45E%27%3EMS%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta property="og:description" content="My page of ideas and works I've vibecoded.">
+<meta property="og:image" content="https://mridulsaravanan.com/assets/me.png">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0e26">
+<link rel="icon" href="assets/me.png" type="image/png">
+<link rel="preload" href="assets/young-serif-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* -----------------------------------------------------------------
-   Mridul Saravanan - personal lab
-   Light paper base, and four vibrant colours that MEAN something:
-   cobalt = builds, violet = AI lab, sun = findings, mint = notes.
-   Bricolage Grotesque for headings, Figtree for reading,
-   IBM Plex Mono only for labels, dates and status.
-   ----------------------------------------------------------------- */
-:root{
-  --bg:#F5F6FB; --surface:#FFFFFF; --ink:#10122B; --ink2:#454A6B; --muted:#757A99;
-  --line:#E3E5F1; --line2:#CFD3E6;
-  --cobalt:#3245FF; --cobalt-d:#2433D6; --cobalt-l:#E8EAFF;
-  --violet:#7448FF; --violet-l:#EFE9FF;
-  --sun:#FFC53D; --sun-l:#FFF4D6;
-  --mint:#12B886; --mint-l:#DDF7EE;
-  --rose:#FF4F79;
-  --display:"Bricolage Grotesque","Figtree",system-ui,sans-serif;
-  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
-  --r:22px; --wrap:1160px;
-  --ease:cubic-bezier(.2,.8,.2,1);
-  --lift:0 18px 40px -22px rgba(16,18,43,.35);
+@font-face { font-family: "Young Serif"; src: url("assets/young-serif-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Figtree"; src: url("assets/figtree-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Figtree"; src: url("assets/figtree-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+
+:root {
+  --night-1: #070a1d;
+  --night-2: #10153a;
+  --horizon: #3b2147;
+  --text: #fff3df;
+  --text-soft: #cdc6e8;
+  --ember: #ffb04a;
+  --paper-glow: rgba(255, 160, 60, .32);
+  --ink-on-paper: #4a1906;
+  --serif: "Young Serif", Georgia, serif;
+  --sans: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --breath: 7s;          /* the one clock every motion follows */
+  --fibre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9 .18' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55  0 0 0 0 .3  0 0 0 0 .12  0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.62 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-a{color:inherit}
-img{max-width:100%;display:block}
-::selection{background:var(--sun);color:var(--ink)}
-:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:8px}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
-.mono{font-family:var(--mono);font-size:.78rem;letter-spacing:.02em}
-.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 12px;border-radius:8px;z-index:100}
-.skip:focus{left:12px}
-
-/* header: stays put while pages change */
-.site-header{position:sticky;top:0;z-index:50;background:rgba(245,246,251,.86);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line);view-transition-name:site-header}
-.site-header .wrap{display:flex;align-items:center;gap:20px;height:68px}
-.brand{display:flex;align-items:center;gap:10px;font:800 1.1rem/1 var(--display);letter-spacing:-.015em;text-decoration:none;white-space:nowrap}
-.brand i{width:28px;height:28px;border-radius:9px;background:conic-gradient(from 210deg,var(--cobalt),var(--violet),var(--rose),var(--sun),var(--mint),var(--cobalt));display:inline-block;flex:none}
-.nav{display:flex;gap:2px;margin-left:10px}
-.nav a{text-decoration:none;color:var(--ink2);font-weight:600;font-size:.95rem;padding:9px 13px;border-radius:12px;transition:background .25s var(--ease),color .25s var(--ease)}
-.nav a:hover{color:var(--ink);background:#EBEDF7}
-.nav a[aria-current="page"]{color:var(--cobalt-d);background:var(--cobalt-l)}
-.h-right{margin-left:auto;display:flex;align-items:center;gap:8px}
-.icon-btn{width:42px;height:42px;border-radius:12px;border:1px solid var(--line2);background:var(--surface);color:var(--ink2);display:grid;place-items:center;cursor:pointer;text-decoration:none;transition:transform .25s var(--ease),border-color .25s,color .25s}
-.icon-btn:hover{color:var(--cobalt);border-color:var(--cobalt);transform:translateY(-1px)}
-.icon-btn svg{width:19px;height:19px}
-.btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 20px;border-radius:14px;font:700 .96rem/1 var(--body);text-decoration:none;cursor:pointer;border:1.5px solid var(--ink);background:transparent;color:var(--ink);transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s}
-.btn:hover{transform:translateY(-2px);box-shadow:var(--lift)}
-.btn.primary{background:var(--ink);color:#fff}
-.btn.sun{background:var(--sun);border-color:var(--sun);color:var(--ink)}
-.btn.ghost-light{border-color:rgba(255,255,255,.7);color:#fff}
-.btn.sm{height:40px;padding:0 16px;font-size:.9rem;border-radius:12px}
-.menu-btn{display:none}
-
-/* page scaffolding */
-main{min-height:60vh;view-transition-name:page}
-.page{padding-top:60px;padding-bottom:84px}
-.page-head{max-width:780px;margin-bottom:40px}
-.page-head h1{font:800 clamp(2.2rem,4.6vw,3.4rem)/1.04 var(--display);letter-spacing:-.035em;margin:0 0 16px}
-.page-head p{color:var(--ink2);font-size:1.12rem;margin:0}
-.page-head .kind{display:inline-block;margin-bottom:14px}
-h2.sec{font:800 clamp(1.5rem,2.4vw,1.9rem)/1.1 var(--display);letter-spacing:-.025em;margin:0}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
-.sec-head a{color:var(--cobalt-d);font-weight:700;font-size:.95rem;text-decoration:none}
-.sec-head a:hover{text-decoration:underline;text-underline-offset:4px}
-section+section{margin-top:84px}
-
-/* status + tags (the word is always shown, never colour alone) */
-.badge{display:inline-flex;align-items:center;gap:6px;font:500 .72rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:6px 9px;border-radius:999px;background:#EEF0F7;color:var(--ink2)}
-.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
-.badge.working,.badge.published{background:var(--mint-l);color:#08795A}
-.badge.prototype,.badge.in-progress,.badge.running,.badge.designing{background:var(--sun-l);color:#8A5A00}
-.badge.idea,.badge.exploring{background:var(--violet-l);color:#5631D6}
-.badge.observed{background:#FFE4EA;color:#C2264D}
-.kind{font:500 .74rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--cobalt-d)}
-.kind.lab{color:#5631D6}.kind.find{color:#8A5A00}.kind.note{color:#08795A}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font:400 .75rem/1 var(--mono);color:var(--ink2);background:#EEF0F7;border-radius:999px;padding:6px 10px}
-
-/* hero: a cobalt block with a notebook grid, and a real lab record */
-.hero{position:relative;overflow:hidden;background:var(--cobalt);color:#fff;
-  background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
-  background-size:40px 40px;background-position:-1px -1px}
-.hero::after{content:"";position:absolute;right:-120px;bottom:-160px;width:420px;height:420px;border-radius:50%;background:var(--violet);opacity:.55;pointer-events:none}
-.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:center;padding-top:76px;padding-bottom:84px}
-.eyebrow{display:inline-block;font:500 .74rem/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--sun);border-radius:999px;padding:7px 12px;margin:0 0 22px}
-.hero h1{font:800 clamp(2.6rem,6vw,4.6rem)/.98 var(--display);letter-spacing:-.045em;margin:0 0 22px}
-.hero h1 span{display:block}
-.hero .lede{font-size:1.14rem;color:#E1E5FF;max-width:35em;margin:0 0 32px}
-.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.hero .ctas .link{color:#fff;font-weight:600;margin-left:6px;text-underline-offset:5px}
-.record{background:var(--surface);color:var(--ink);border-radius:var(--r);overflow:hidden;box-shadow:0 40px 80px -30px rgba(10,14,80,.6);transform:rotate(1.2deg);transition:transform .5s var(--ease)}
-.record:hover{transform:rotate(0)}
-.record-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
-.record-body{padding:18px 18px 16px}
-.record .q{color:var(--ink2);font-size:.93rem;margin:0 0 12px}
-.record .a{font-size:1.02rem;margin:0 0 14px;padding-left:12px;border-left:3px solid var(--cobalt-l)}
-.record mark{background:#FFE4EA;color:var(--ink);border-radius:4px;padding:0 3px}
-.verdict{display:flex;gap:10px;align-items:flex-start;background:#FFF1F4;border-radius:14px;padding:11px 13px;font-size:.92rem;color:#7A1F37}
-.verdict b{color:#C2264D}
-.record-foot{padding:11px 18px;border-top:1px solid var(--line);color:var(--muted);margin:0}
-
-/* cards */
-.featured{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
-.card.big{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
-.card.big .shot{aspect-ratio:auto;padding:26px 26px 0;border-bottom:0;border-right:1px solid var(--line);display:flex;align-items:flex-end}
-.card.big .shot img{height:auto;aspect-ratio:16/10}
-.card.big .body{padding:34px 34px 30px;justify-content:center;gap:14px}
-.card.big h3{font-size:clamp(1.6rem,2.4vw,2.1rem)}
-.card.big p{font-size:1.05rem;max-width:30em}
-.card.big .links{margin-top:6px;font-size:1rem}
-.card{--accent:var(--cobalt);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
-.card:hover{transform:translateY(-4px);box-shadow:0 26px 50px -28px color-mix(in srgb,var(--accent) 55%,transparent);border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}
-.card .shot{aspect-ratio:16/10;background:linear-gradient(135deg,var(--cobalt-l),var(--violet-l));overflow:hidden;border-bottom:1px solid var(--line);padding:18px 18px 0}
-.card .shot img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;box-shadow:0 10px 30px -14px rgba(16,18,43,.4);transition:transform .6s var(--ease),opacity .5s}
-.card:hover .shot img{transform:scale(1.025)}
-.fallback{width:100%;height:100%;min-height:150px;display:grid;place-items:center;border-radius:12px 12px 0 0;background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(50,69,255,.06) 14px 15px)}
-.fallback span{font:500 .74rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);background:var(--surface);padding:8px 12px;border-radius:999px}
-.card .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
-.card h3{font:800 1.32rem/1.15 var(--display);letter-spacing:-.02em;margin:0}
-.card h3 a{text-decoration:none}
-.card p{margin:0;color:var(--ink2);font-size:.97rem}
-.meta-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.links{display:flex;gap:16px;flex-wrap:wrap;margin-top:auto;padding-top:8px;font-size:.93rem;font-weight:700}
-.links a{color:var(--cobalt-d);text-decoration:none}
-.links a:hover{text-decoration:underline;text-underline-offset:4px}
-
-/* explore: one colour per kind of content */
-.explore{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.explore a{border-radius:var(--r);padding:24px 22px;text-decoration:none;display:flex;flex-direction:column;gap:10px;min-height:190px;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
-.explore a:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:var(--lift)}
-.explore b{font:800 1.3rem/1.1 var(--display);letter-spacing:-.02em}
-.explore span{font-size:.95rem;opacity:.86}
-.explore .count{margin-top:auto;opacity:1;font-weight:500}
-.explore .c-build{background:var(--cobalt);color:#fff}
-.explore .c-lab{background:var(--violet);color:#fff}
-.explore .c-find{background:var(--sun);color:var(--ink)}
-.explore .c-note{background:var(--mint);color:#04261C}
-
-/* current focus */
-.focus{display:grid;grid-template-columns:180px minmax(0,1fr);gap:28px;align-items:start;background:var(--violet-l);border-radius:var(--r);padding:34px 36px}
-.focus .kind{color:#5631D6}
-.focus p{font:600 clamp(1.15rem,2vw,1.45rem)/1.45 var(--display);letter-spacing:-.012em;margin:0;max-width:36em;color:#24124F}
-
-/* updates */
-.updates{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.updates li+li{border-top:1px solid var(--line)}
-.updates a{display:grid;grid-template-columns:130px 110px minmax(0,1fr) 24px;gap:16px;padding:18px 22px;text-decoration:none;align-items:center;transition:background .25s}
-.updates a:hover{background:var(--cobalt-l)}
-.updates .t{font:700 1.05rem/1.2 var(--display)}
-.updates .d{color:var(--muted)}
-.updates .go{color:var(--cobalt);font-weight:700;transition:transform .25s var(--ease)}
-.updates a:hover .go{transform:translateX(4px)}
-
-/* contact cta */
-.cta{background:var(--sun);border-radius:28px;padding:44px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center;position:relative;overflow:hidden}
-.cta::after{content:"";position:absolute;right:-60px;top:-70px;width:220px;height:220px;border-radius:50%;background:var(--rose);opacity:.85}
-.cta>*{position:relative;z-index:1}
-.cta h2{font:800 clamp(1.7rem,3.2vw,2.4rem)/1.08 var(--display);letter-spacing:-.03em;margin:0 0 10px}
-.cta p{margin:0;color:#3A2A00;max-width:34em}
-.cta .row{display:flex;gap:10px;flex-wrap:wrap}
-
-/* listings */
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
-.filters button{font:600 .9rem/1 var(--body);color:var(--ink2);background:var(--surface);border:1px solid var(--line2);border-radius:999px;padding:10px 15px;cursor:pointer;transition:all .25s var(--ease)}
-.filters button:hover{color:var(--ink);border-color:var(--ink)}
-.filters button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
-.rows{display:flex;flex-direction:column;gap:14px}
-.row-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;padding:24px 26px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-decoration:none;align-items:start;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
-.row-item:hover{transform:translateY(-3px);box-shadow:0 22px 44px -28px rgba(116,72,255,.55);border-color:#D9CCFF}
-.row-item h3{font:800 1.25rem/1.2 var(--display);letter-spacing:-.015em;margin:0 0 6px}
-.row-item p{margin:0;color:var(--ink2);max-width:46em}
-.row-item .side{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.figure-num{font:800 2rem/1 var(--display);color:var(--cobalt);letter-spacing:-.03em;min-width:110px}
-.finding-row{grid-template-columns:120px minmax(0,1fr) auto}
-.empty{background:var(--surface);border:1.5px dashed var(--line2);border-radius:var(--r);padding:56px 28px;text-align:center;color:var(--ink2)}
-.empty .glyph{width:64px;height:64px;border-radius:20px;margin:0 auto 16px;display:grid;place-items:center;font:800 1.6rem/1 var(--display)}
-.empty b{display:block;color:var(--ink);font:800 1.3rem/1.25 var(--display);margin-bottom:8px;letter-spacing:-.015em}
-.empty.find .glyph{background:var(--sun-l);color:#8A5A00}
-.empty.note .glyph{background:var(--mint-l);color:#08795A}
-.empty.about .glyph{background:var(--cobalt-l);color:var(--cobalt)}
-.empty.about{margin-bottom:56px}
-.empty b:last-child{margin-bottom:0}
-
-/* detail pages */
-.crumbs{margin-bottom:24px;color:var(--muted)}
-.crumbs a{color:var(--cobalt-d);text-decoration:none}
-.crumbs a:hover{text-decoration:underline}
-.detail{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:52px;align-items:start}
-.detail .lead{font-size:1.18rem;color:var(--ink2);margin:0 0 24px}
-.detail .hero-shot{border-radius:var(--r);overflow:hidden;margin:0 0 38px;background:linear-gradient(135deg,var(--cobalt-l),var(--violet-l));padding:22px 22px 0}
-.detail .hero-shot img{width:100%;border-radius:12px 12px 0 0;box-shadow:0 14px 34px -16px rgba(16,18,43,.45)}
-.prose{max-width:44em}
-.prose h2{font:800 1.35rem/1.2 var(--display);letter-spacing:-.015em;margin:38px 0 10px}
-.prose p,.prose li{color:var(--ink2)}
-.prose ul,.prose ol{padding-left:1.2em}
-.prose li{margin:5px 0}
-.prose li::marker{color:var(--cobalt)}
-.prose a{color:var(--cobalt-d);font-weight:600}
-.aside{position:sticky;top:96px;border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:16px;background:var(--surface)}
-.aside dt{color:var(--muted);margin-bottom:5px}
-.aside dd{margin:0 0 6px;font-weight:600}
-.aside dl{margin:0}
-.callout{background:var(--violet-l);border-radius:16px;padding:14px 18px;color:#3A1F94;font-size:.96rem;margin:0 0 28px}
-.related{margin-top:48px;border-top:1px solid var(--line);padding-top:24px}
-.related ul{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-direction:column;gap:8px}
-.related a{color:var(--cobalt-d);text-decoration:none;font-weight:700}
-
-/* about */
-.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
-.steps li{border-radius:18px;padding:18px;background:var(--surface);border:1px solid var(--line);position:relative;overflow:hidden}
-.steps li::before{content:attr(data-n);font:800 2.2rem/1 var(--display);display:block;margin-bottom:12px;letter-spacing:-.03em}
-.steps li:nth-child(1)::before{color:var(--cobalt)}.steps li:nth-child(2)::before{color:var(--violet)}.steps li:nth-child(3)::before{color:var(--rose)}.steps li:nth-child(4)::before{color:#E0A100}.steps li:nth-child(5)::before{color:var(--mint)}
-.steps b{display:block;font:800 1.05rem/1.25 var(--display);margin-bottom:6px}
-.steps span{color:var(--ink2);font-size:.93rem}
-.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px}
-.about-cta{background:var(--ink);color:#fff;border-radius:28px;padding:40px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center}
-.about-cta p{color:#C9CCEA;margin:0}
-.about-cta .mono{color:var(--sun)}
-
-/* search */
-.search-box{display:flex;gap:10px;margin-bottom:28px}
-.search-box input{flex:1;min-width:0;height:54px;border-radius:16px;border:1.5px solid var(--line2);background:var(--surface);color:var(--ink);font:500 1.02rem var(--body);padding:0 18px;transition:border-color .25s,box-shadow .25s}
-.search-box input:focus{outline:none;border-color:var(--cobalt);box-shadow:0 0 0 4px var(--cobalt-l)}
-.search-box input::placeholder{color:var(--muted)}
-
-/* footer */
-.site-footer{background:var(--ink);color:#C9CCEA;padding:44px 0 48px;margin-top:20px}
-.site-footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
-.site-footer b{color:#fff;font:800 1.1rem/1.2 var(--display)}
-.site-footer nav{display:flex;gap:20px;flex-wrap:wrap}
-.site-footer a{text-decoration:none;font-weight:600}
-.site-footer a:hover{color:var(--sun)}
-.site-footer .mono{color:#8E92B8}
-
-/* smooth page changes (same-document View Transitions, where supported) */
-::view-transition-old(page){animation:vt-out .18s var(--ease) both}
-::view-transition-new(page){animation:vt-in .34s var(--ease) both}
-@keyframes vt-out{to{opacity:0;transform:translateY(-6px)}}
-@keyframes vt-in{from{opacity:0;transform:translateY(10px)}}
-img.fade{opacity:0}
-img.fade.loaded{opacity:1}
-
-/* responsive */
-@media (max-width:980px){
-  .hero .wrap,.detail,.two{grid-template-columns:minmax(0,1fr)}
-  .card.big{grid-template-columns:minmax(0,1fr)}
-  .card.big .shot{border-right:0;border-bottom:1px solid var(--line);padding:18px 18px 0}
-  .card.big .body{padding:20px 22px 22px;gap:10px}
-  .record{transform:none}
-  .aside{position:static}
-  .grid3{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .explore{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { background: var(--night-1); scrollbar-color: #2a2f5c var(--night-1); }
+body {
+  min-height: 100vh; color: var(--text); font: 400 18px/1.6 var(--sans); -webkit-font-smoothing: antialiased;
 }
-@media (max-width:840px){
-  .nav{display:none;position:absolute;top:68px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;padding:10px 16px 18px;margin:0;box-shadow:var(--lift)}
-  .nav.open{display:flex}
-  .nav a{padding:13px 14px}
-  .menu-btn{display:grid}
-  .h-right .btn{display:none}
+/* the sky is a fixed layer, so it never seams or scrolls away (and works where background-attachment: fixed does not) */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1;
+  background:
+    radial-gradient(120% 60% at 50% 115%, var(--horizon) 0%, rgba(59, 33, 71, 0) 60%),
+    linear-gradient(to bottom, var(--night-1) 0%, var(--night-2) 70%, #1a1640 100%); }
+::selection { background: rgba(255, 176, 74, .35); color: #fff; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--ember); outline-offset: 6px; border-radius: 10px; }
+
+#sky { position: fixed; inset: -40px -40px -300px; width: calc(100% + 80px); height: calc(100% + 340px); z-index: 0; pointer-events: none; will-change: transform; }
+.handlight { position: fixed; left: 0; top: 0; width: 520px; height: 520px; margin: -260px 0 0 -260px; z-index: 0; pointer-events: none; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 176, 90, .13), rgba(255, 150, 70, .05) 45%, transparent 100%);
+  transform: translate3d(var(--mx, 50vw), var(--my, 40vh), 0); opacity: 0; transition: opacity .8s ease; }
+.handlight.on { opacity: 1; }
+.wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+/* who */
+.hero { text-align: center; padding: 15vh 0 0; }
+.me { width: 96px; height: 96px; display: block; margin: 0 auto 26px; animation: float var(--breath) ease-in-out infinite;
+  filter: drop-shadow(0 0 18px rgba(255, 170, 80, .35)) drop-shadow(0 8px 16px rgba(0, 0, 0, .35)); }
+h1 { margin: 0; font: 400 clamp(46px, 7.2vw, 86px)/1.02 var(--serif); letter-spacing: -0.02em; color: var(--text);
+  text-wrap: balance; }
+.hello { margin: 26px auto 0; max-width: 33em; font-size: clamp(17px, 1.6vw, 20px); color: var(--text-soft); text-wrap: pretty; }
+.hello b { color: var(--text); font-weight: 600; }
+
+/* the lanterns */
+.field { padding: 12vh 0 0; }
+.caption { margin: 0 auto 11vh; text-align: center; font: 400 clamp(19px, 2vw, 24px)/1.4 var(--serif); color: #e9dcc4; max-width: 26em; }
+.lanterns { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 84px 28px; }
+.lanterns li { position: relative; display: flex; justify-content: center; transform: translateY(var(--hang, 0px)); }
+.lanterns li:nth-child(5n + 1) { --hang: 10px; }
+.lanterns li:nth-child(5n + 2) { --hang: 46px; }
+.lanterns li:nth-child(5n + 3) { --hang: 0px; }
+.lanterns li:nth-child(5n + 4) { --hang: 34px; }
+.lanterns li:nth-child(5n + 5) { --hang: 14px; }
+
+.lantern-link { display: flex; flex-direction: column; align-items: center; width: 150px; padding: 6px 0 4px; border-radius: 14px;
+  transition: filter .5s cubic-bezier(.16, 1, .3, 1), opacity .5s cubic-bezier(.16, 1, .3, 1); }
+.bob { display: block; animation: bob var(--breath) ease-in-out infinite; animation-delay: calc(var(--i) * -0.9s); }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(-1.2deg); } 50% { transform: translateY(-9px) rotate(1.2deg); } }
+
+.lantern { position: relative; display: block; width: 128px; height: 156px; transition: transform .55s cubic-bezier(.16, 1, .3, 1); }
+.lantern .glow { position: absolute; inset: -40px -36px; border-radius: 50%;
+  background: radial-gradient(closest-side, var(--paper-glow), rgba(255, 140, 40, .1) 55%, transparent 100%);
+  transition: transform .55s cubic-bezier(.16, 1, .3, 1), opacity .55s; }
+.lantern .cap { position: absolute; top: 2px; left: 33%; width: 34%; height: 9px; border-radius: 4px 4px 2px 2px; background: #2b140c; }
+.lantern .paper {
+  position: absolute; left: 0; right: 0; top: 9px; bottom: 15px;
+  border-radius: 46% 46% 40% 40% / 24% 24% 18% 18%;
+  background:
+    var(--fibre),
+    repeating-linear-gradient(90deg, rgba(110, 35, 8, .13) 0 1px, transparent 1px 19px),
+    radial-gradient(ellipse 62% 56% at 50% 64%, #fff3cf 0%, var(--p1) 34%, var(--p2) 74%, var(--p3) 100%);
+  background-blend-mode: multiply, normal, normal;
+  box-shadow: inset 0 -16px 22px rgba(120, 32, 8, .38), inset 0 12px 16px rgba(110, 30, 8, .28);
+  display: flex; align-items: center; justify-content: center; padding: 0 9px; text-align: center;
 }
-@media (max-width:640px){
-  .wrap{padding:0 16px}
-  .page{padding-top:40px;padding-bottom:64px}
-  .hero .wrap{padding-top:48px;padding-bottom:56px;gap:36px}
-  .hero::after{width:260px;height:260px;right:-120px;bottom:-120px}
-  .grid3,.explore,.featured{grid-template-columns:minmax(0,1fr)}
-  .explore a{min-height:0}
-  .focus{grid-template-columns:minmax(0,1fr);gap:10px;padding:26px 22px}
-  .updates a{grid-template-columns:minmax(0,1fr) 24px;gap:4px 12px}
-  .updates .d,.updates .kind,.updates .t{grid-column:1}
-  .updates .go{grid-column:2;grid-row:1/span 3}
-  .cta::after{width:140px;height:140px;right:-70px;top:-70px}
-  .cta,.about-cta{grid-template-columns:minmax(0,1fr);padding:28px}
-  .row-item,.finding-row{grid-template-columns:minmax(0,1fr);padding:20px}
-  .row-item .side{align-items:flex-start;flex-direction:row}
-  .steps{grid-template-columns:minmax(0,1fr)}
+.lantern .name { font: 400 15px/1.15 var(--serif); color: var(--ink-on-paper); letter-spacing: -0.01em; white-space: nowrap; }
+.lantern .base { position: absolute; bottom: 9px; left: 26%; width: 48%; height: 8px; border-radius: 2px 2px 5px 5px; background: #2b140c; }
+.lantern .flame { position: absolute; bottom: 0; left: 50%; width: 10px; height: 13px; margin-left: -5px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: radial-gradient(ellipse at 50% 70%, #fffbe8 0%, #ffd56b 45%, rgba(255, 140, 40, 0) 75%);
+  animation: flicker calc(var(--breath) / 14) ease-in-out infinite alternate; transform-origin: 50% 90%; }
+@keyframes flicker { from { transform: scale(.88, .92); opacity: .85; } to { transform: scale(1.05, 1.12); opacity: 1; } }
+
+/* three papers from one family */
+.lanterns li { --p1: #ffc35e; --p2: #f2883a; --p3: #c4561f; }
+.lanterns li:nth-child(3n + 2) { --p1: #ffd36a; --p2: #f4a531; --p3: #c97818; }
+.lanterns li:nth-child(3n + 3) { --p1: #ffb98a; --p2: #ef6d48; --p3: #b8402a; }
+
+.desc { display: block; margin-top: 16px; max-width: 176px; text-align: center; font-size: 14.5px; line-height: 1.45; color: #b7b0d6;
+  transition: color .45s cubic-bezier(.16, 1, .3, 1), transform .45s cubic-bezier(.16, 1, .3, 1); }
+
+/* depth of field: the one you point at comes into focus, the rest of the sky softens */
+.lanterns:has(.lantern-link:hover, .lantern-link:focus-visible) .lantern-link:not(:hover):not(:focus-visible) { filter: blur(1.2px) brightness(.6) saturate(.8); opacity: .8; }
+.lantern-link:hover .lantern, .lantern-link:focus-visible .lantern { transform: translateY(-12px) scale(1.06); }
+.lantern-link:hover .glow, .lantern-link:focus-visible .glow { transform: scale(1.35); }
+.lantern-link:hover .desc, .lantern-link:focus-visible .desc { color: #ffe9c7; transform: translateY(-4px); }
+.lantern-link:focus-visible { outline-offset: 2px; }
+
+/* visited lanterns burn brighter on this device */
+.lanterns li.visited .paper { filter: brightness(1.12) saturate(1.08); }
+.lanterns li.visited .glow { --paper-glow: rgba(255, 190, 90, .45); }
+.lanterns li.visited .flame { width: 13px; height: 16px; margin-left: -6.5px; }
+
+/* release: the lantern lifts away before the app opens */
+.lanterns li.launch .lantern-link { animation: launch .75s cubic-bezier(.5, 0, .75, 0) forwards; }
+@keyframes launch { to { transform: translateY(-70vh) scale(.55); opacity: 0; filter: blur(2px); } }
+
+footer { position: relative; z-index: 1; text-align: center; padding: 18vh 24px 48px; color: var(--text-soft); }
+footer nav { display: flex; justify-content: center; gap: 30px; font-size: 16px; }
+footer nav a { position: relative; padding: 4px 0; transition: color .3s; }
+footer nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--ember); transform: scaleX(0); transform-origin: left; transition: transform .4s cubic-bezier(.16, 1, .3, 1); }
+footer nav a:hover, footer nav a:focus-visible { color: var(--text); }
+footer nav a:hover::after, footer nav a:focus-visible::after { transform: scaleX(1); }
+footer small { display: block; margin-top: 18px; font-size: 12px; color: #9a93bd; }
+
+/* entrance: one orchestrated moment, lanterns rising into place */
+.js .lanterns li { animation: arrive 1.6s cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(.35s + var(--i) * 90ms); }
+@keyframes arrive { from { opacity: 0; translate: 0 60px; } to { opacity: 1; translate: 0 0; } }
+.js .hero > * { animation: rise 1.2s cubic-bezier(.16, 1, .3, 1) both; }
+.js .hero > :nth-child(2) { animation-delay: .08s; }
+.js .hero > :nth-child(3) { animation-delay: .16s; }
+@keyframes rise { from { opacity: 0; translate: 0 16px; } to { opacity: 1; translate: 0 0; } }
+
+@media (max-width: 900px) {
+  .lanterns { grid-template-columns: repeat(3, 1fr); gap: 70px 16px; }
+  .lanterns li:nth-child(n) { --hang: 0px; }
+  .lanterns li:nth-child(3n + 2) { --hang: 30px; }
 }
-@media (max-width:400px){
-  .brand i,.h-right a[aria-label^="GitHub"]{display:none}
-  .site-header .wrap{gap:10px}
-  .icon-btn{width:40px;height:40px}
+@media (max-width: 600px) {
+  .hero { padding-top: 11vh; }
+  .me { width: 80px; height: 80px; margin-bottom: 20px; }
+  .field { padding-top: 9vh; }
+  .caption { margin-bottom: 8vh; }
+  .lanterns { grid-template-columns: repeat(2, 1fr); gap: 56px 10px; }
+  .lanterns li:nth-child(n) { --hang: 0px; }
+  .lanterns li:nth-child(2n) { --hang: 34px; }
+  .lantern-link { width: 100%; max-width: 168px; }
+  .lantern { width: 116px; height: 144px; }
+  .desc { font-size: 14px; }
+  footer { padding-top: 14vh; }
 }
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,::view-transition-old(page),::view-transition-new(page){animation:none!important;transition:none!important}
-  .record{transform:none}
+@media (prefers-reduced-motion: reduce) {
+  .bob, .lantern .flame, .js .lanterns li, .js .hero > *, .me { animation: none; }
+  .lantern, .glow, .desc, .lantern-link { transition: none; }
 }
 </style>
+<script>document.documentElement.className = 'js';</script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="handlight" id="handlight" aria-hidden="true"></div>
 
-<header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="#/"><i aria-hidden="true"></i>Mridul Saravanan</a>
-    <nav class="nav" id="nav" aria-label="Main">
-      <a href="#/">Home</a><a href="#/projects">Projects</a><a href="#/lab">AI Lab</a><a href="#/findings">Findings</a><a href="#/notes">Notes</a><a href="#/about">About</a>
-    </nav>
-    <div class="h-right">
-      <a class="icon-btn" href="#/search" aria-label="Search the site"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></a>
-      <a class="icon-btn" href="https://github.com/mridulsn" aria-label="GitHub (opens in a new tab)" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
-      <a class="btn sm" href="#/about/contact">Contact</a>
-      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-    </div>
-  </div>
-</header>
+<div class="wrap">
+  <header class="hero">
+    <img class="me" src="assets/me.png" alt="" width="96" height="96">
+    <h1>Mridul Saravanan</h1>
+    <p class="hello">Hi, I'm <b>Mridul</b>, and this is my portfolio page: my page of ideas and works I've vibecoded. Hope it's to your liking!</p>
+  </header>
 
-<main id="main" tabindex="-1"></main>
+  <main class="field">
+    <p class="caption">Ten small apps for everyday things. Pick a lantern to open one.</p>
+    <ul class="lanterns" id="lanterns" aria-label="Projects"></ul>
+  </main>
+</div>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <div><b>Mridul Saravanan</b><br><span>Made with curiosity. Documented with evidence.</span><br><span class="mono" id="copy"></span></div>
-    <nav aria-label="Elsewhere">
-      <a href="https://github.com/mridulsn" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/in/mridulsn" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:mridul8527@gmail.com">Email</a>
-    </nav>
-  </div>
+<footer>
+  <nav aria-label="Elsewhere">
+    <a href="https://github.com/mridulsn">GitHub</a>
+    <a href="https://www.linkedin.com/in/mridulsn">LinkedIn</a>
+    <a href="mailto:mridul8527@gmail.com">Email</a>
+  </nav>
+  <small>Sticker: Noto Emoji by Google (Apache 2.0)</small>
 </footer>
 
 <script>
-(function(){
-'use strict';
+(function () {
+  'use strict';
+  var PROJECTS = [
+    ['MayhemNull', 'A focus timer that shows where your time went', 'mayhemnull'],
+    ['workphrasing', 'Say it how you feel, send it how you should', 'workphrasing'],
+    ['fridgecook', 'Tick what is in your kitchen, see what to cook', 'fridgecook'],
+    ['choreboss', 'Family chores as a weekly boss fight', 'choreboss'],
+    ['packlist', 'A packing checklist for your exact trip', 'packlist'],
+    ['guestwifi', 'A WiFi card your guests just scan', 'guestwifi'],
+    ['readforme', 'Paste any text, hear it read aloud slowly', 'readforme'],
+    ['worryshredder', 'Write a worry down, then let it go', 'worryshredder'],
+    ['Ruledrift', 'A brain game where the rule keeps changing', 'ruledrift'],
+    ['Chomp', 'A tiny maze game: eat the dots, dodge the ghosts', 'chomp']
+  ];
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var visited = [];
+  try { visited = JSON.parse(localStorage.getItem('lanterns.visited') || '[]'); } catch (e) { visited = []; }
 
-/* =================================================================
-   CONTENT. Add a project, experiment, finding or note by adding one
-   object to the matching list. Leave a field out when it is unknown:
-   the page hides it instead of showing a blank.
-   check:true  = filled in from what I (Claude) know of his work; he
-                 must confirm it before publishing.
-   ================================================================= */
-var SITE={
-  name:'Mridul Saravanan',
-  email:'mridul8527@gmail.com',
-  github:'https://github.com/mridulsn',
-  linkedin:'https://www.linkedin.com/in/mridulsn',
-  oldPortfolio:'https://mridulsn.github.io/ai-ops-portfolio',
-  focus:"I'm currently exploring AI Operations, evaluation methods, output quality, and human-in-the-loop workflows. I'm interested in how to test AI outputs systematically, identify failure patterns, and decide when human review is necessary.",
-  nowUpdated:'2026-10-13'
-};
+  var ul = document.getElementById('lanterns');
+  PROJECTS.forEach(function (p, i) {
+    var li = document.createElement('li');
+    li.style.setProperty('--i', i);
+    if (visited.indexOf(p[2]) >= 0) li.className = 'visited';
+    var a = document.createElement('a');
+    a.className = 'lantern-link'; a.href = '/' + p[2] + '/'; a.setAttribute('data-slug', p[2]);
+    a.innerHTML = '<span class="bob"><span class="lantern"><span class="glow"></span><span class="cap"></span>' +
+      '<span class="paper"><span class="name"></span></span><span class="base"></span><span class="flame"></span></span></span>' +
+      '<span class="desc"></span>';
+    a.querySelector('.name').textContent = p[0];
+    a.querySelector('.desc').textContent = p[1];
+    a.querySelector('.bob').style.setProperty('--i', i);
+    li.appendChild(a); ul.appendChild(li);
+  });
 
-var PROJECTS=[
-  {slug:'choreboss',title:'choreboss',check:true,featured:1,
-   summary:'Family chores as a weekly boss fight. Every chore is a hit on this week\u2019s boss; beat it together and claim the reward.',
-   type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
-   tags:['Family','Web App','Game'],cover:'assets/choreboss.jpg',
-   coverAlt:'A pixel monster called Sir Sticky Spill with its health bar part drained, and a reward of pizza night',
-   liveUrl:'https://mridulsaravanan.com/choreboss/',sourceUrl:'https://github.com/mridulsn/choreboss',
-   tools:['HTML, CSS and JavaScript, no libraries','GitHub Pages hosting'],
-   sections:{
-     problem:'Chore charts work for about a week. Children lose interest in ticking boxes, and points systems quietly favour whoever is oldest.',
-     approach:'Make it a shared goal instead of a competition: one boss a week that the whole family fights together, with a reward the family chooses. Keep it fair so the youngest can top the scoreboard too.',
-     features:['A new pixel boss every Monday with health that scales with the family','Tap who did it, then what they did','Tougher chores hit harder, and younger players get a bonus','Scoreboard with streaks and levels','Undo, and a backup file to move to another device'],
-     howItWorks:'Each chore has an effort from one to five; damage is effort times five times an age bonus, frozen at the moment the chore is logged so later edits never rewrite history. Weeks run Monday to Sunday on the device clock, and everything is kept on the device.',
-     aiRole:'Vibecoded with Claude Code. I picked the idea and the Game Boy look; it built the game rules and the tests.',
-     testing:'Checks on week boundaries, the fairness bonus, streaks, undo and safe import of backups, plus browser tests on desktop and phone including a backup and restore round trip.',
-     limitations:'It runs on one device at a time; to share between phones, move a backup file across.'
-   }},
-  {slug:'fridgecook',title:'fridgecook',check:true,featured:1,
-   summary:'Tick what is in your kitchen and see what you can cook right now, or with just one more thing from the shop.',
-   type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
-   tags:['Cooking','Web App','Home'],cover:'assets/fridgecook.jpg',
-   coverAlt:'fridgecook results: a shopping tip, then dishes you can make right now such as masala khichdi, tomato rice and paneer paratha',
-   liveUrl:'https://mridulsaravanan.com/fridgecook/',sourceUrl:'https://github.com/mridulsn/fridgecook',
-   tools:['HTML, CSS and JavaScript, no libraries','About a hundred dishes written for this project','GitHub Pages hosting'],
-   sections:{
-     problem:'The question at the end of a long day is not what is the best recipe, but what can I make with what is already here. Recipe sites start from the dish, not from your shelves.',
-     approach:'Start from the kitchen: tick what you have, and sort dishes into right now, one more thing, and two more things. Then point out the single item from the shop that would open up the most options.',
-     features:['About a hundred Indian and everyday dishes with short steps','Right now, with one more thing, and with two more things','Which single item would unlock the most dishes','Filters for veg, veg with eggs and Jain, and a time limit','Each recipe shows what you have, what you need and what is optional'],
-     howItWorks:'Each dish lists what it needs and what is optional; salt, oil and everyday spices are assumed. The page compares that with your ticks, ranks dishes by how much of your kitchen they use, and remembers your ticks on the device.',
-     aiRole:'Vibecoded with Claude Code. I set the idea and the filters; it wrote the dish list, the matching and the tests.',
-     testing:'Over 1,400 checks: every ingredient is on the kitchen list, every dish can be reached, the veg and Jain rules hold, and sample kitchens give the expected dishes. Plus browser tests on desktop and phone.',
-     limitations:'The dishes are home-style starting points, not chef recipes, and quantities are left to taste.'
-   }},
-  {slug:'readforme',title:'readforme',check:true,featured:1,
-   summary:'Paste any text and hear it read aloud slowly, with each word lit up as it is spoken, in print as big as you need.',
-   type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
-   tags:['Accessibility','Web App','Speech'],cover:'assets/readforme.jpg',
-   coverAlt:'A letter shown in large amber text on a dark screen, with the sentence being read highlighted and the current word lit up',
-   liveUrl:'https://mridulsaravanan.com/readforme/',sourceUrl:'https://github.com/mridulsn/readforme',
-   tools:['HTML, CSS and JavaScript, no libraries','The browser speech engine (Web Speech API)','GitHub Pages hosting'],
-   sections:{
-     problem:'Long letters, forwarded messages and small print are hard work for tired eyes, and many older people would rather listen than read. Phones can read text aloud, but the settings are buried and it is easy to lose your place.',
-     approach:'One box to paste into and one big button. Read slowly by default, one sentence at a time, show exactly which word is being spoken, and make going back a sentence a single tap.',
-     features:['Reads aloud with the voices already on the device, Indian English first when there is one','Each word lights up as it is spoken','Back and Next by sentence, or tap any sentence to start there','Speed from very slow to fast, and five text sizes','Paste, type or open a text file'],
-     howItWorks:'The text is split into sentences, handling titles such as Dr. and Mr., decimals such as 3.30 and the Hindi full stop, and each sentence is spoken on its own. Word events from the speech engine light up the matching word. Speed, voice and size are remembered on the device; the text is not.',
-     aiRole:'Vibecoded with Claude Code. I picked the problem and the amber terminal look; it built the reader and the tests.',
-     testing:'Checks on sentence and word splitting and voice choice, plus browser tests on desktop and phone that swap in a stand-in speech engine, so highlighting, pause, back, next, speed and voice are checked exactly.',
-     limitations:'Voices and word highlighting depend on the device and browser; some voices do not report words, and then only the sentence is highlighted.'
-   }},
-  {slug:'packlist',title:'packlist',check:true,featured:1,
-   summary:'Tell it the trip, the days, the weather and who is going. It makes a packing checklist with quantities, ready to tick off.',
-   type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
-   tags:['Travel','Web App','Checklist'],cover:'assets/packlist.jpg',
-   coverAlt:'A packlist checklist for a Goa trip in a green Game Boy style screen, with six items ticked and a progress bar',
-   liveUrl:'https://mridulsaravanan.com/packlist/',sourceUrl:'https://github.com/mridulsn/packlist',
-   tools:['HTML, CSS and JavaScript, no libraries','A hand-written set of packing rules','GitHub Pages hosting'],
-   sections:{
-     problem:'Packing lists online are either generic or written for a different kind of trip. The things that actually get forgotten depend on the trip: the PNR for a train, a plug adapter abroad, enough diapers for a baby, lower berths for grandparents.',
-     approach:'Ask only what changes the list: kind of trip, days, weather, how you travel, who is coming and what you plan to do. Then work out quantities, so the list says ten pairs of socks rather than just socks.',
-     features:['Seven kinds of trip, including weddings and pilgrimages','Quantities per person, with clothes planned around one wash on longer trips','Sections for babies, kids and older travellers only when they are coming','Abroad: passport, visa, adapter, currency and a local SIM','Tick off, add your own items, save lists, print, or copy as text for WhatsApp'],
-     howItWorks:'A set of plain rules turns the trip details into items and counts, for example about seven diapers a day plus spares, or one jacket each in mild weather and full winter layers in the cold. Lists and ticks are saved on the device.',
-     aiRole:'Vibecoded with Claude Code. I set the brief and the Game Boy look; it wrote the packing rules and the tests.',
-     testing:'A golden set of ten real trips, from Goa and a Jaipur wedding to London and Dubai with a baby, with items that must and must not appear and exact quantities: 1,697 checks. Plus browser tests on desktop and phone.',
-     limitations:'The rules are general; visa and airline rules differ by trip, so check them for yours.'
-   }},
-  {slug:'worryshredder',title:'worryshredder',check:true,featured:1,
-   summary:'Write down what is worrying you, then shred it, burn it or float it away on a balloon. A small ritual for letting go.',
-   type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
-   tags:['Wellbeing','Web App','Animation'],cover:'assets/worryshredder.jpg',
-   coverAlt:'A worry about a Monday presentation written on lined paper, burning away from the bottom in pixel flames',
-   liveUrl:'https://mridulsaravanan.com/worryshredder/',sourceUrl:'https://github.com/mridulsn/worryshredder',
-   tools:['HTML, CSS and JavaScript, no libraries','Canvas animations','GitHub Pages hosting'],
-   sections:{
-     problem:'Worries go round and round when they stay in your head. Writing one down and then physically throwing it away is an old trick, but you do not always have paper and a bin to hand.',
-     approach:'Keep it to one box, three ways to let go and one button. Make the moment of letting go feel satisfying, then say one short, kind thing that never promises everything will be fine.',
-     features:['Shred, burn or float away, each with its own pixel animation','A short kind line afterwards, and a count of worries let go','A plain fade instead of the animation when the device asks for reduced motion','If a worry mentions self-harm or not wanting to live, a gentle reply with the Tele-MANAS helpline instead of a playful one'],
-     howItWorks:'The worry is drawn onto a canvas as a note on lined paper, then cut into strips, burnt cell by cell from the bottom, or folded small and lifted by a balloon. The words are not kept anywhere; only the count is remembered on the device.',
-     aiRole:'Vibecoded with Claude Code. I picked the idea and the cosy pixel-paper look; it built the animations and the tests.',
-     testing:'Automated checks on the kind lines, text wrapping and the helpline trigger, plus browser tests on desktop and phone for all three animations, reduced motion, and that the worry text never reaches storage.',
-     limitations:'It is a small ritual, not therapy. The helpline check looks for words, so it will not catch everything.'
-   }},
-  {slug:'guestwifi',title:'guestwifi',check:true,featured:1,
-   summary:'Type your WiFi name and password once and print a card with a QR code. Guests scan it with their phone camera and they are on.',
-   type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
-   tags:['Home','Web App','Print'],cover:'assets/guestwifi.jpg',
-   coverAlt:'A guestwifi fridge card: a Guest WiFi heading, a QR code, the network name Sharma Home 5G and its password',
-   liveUrl:'https://mridulsaravanan.com/guestwifi/',sourceUrl:'https://github.com/mridulsn/guestwifi',
-   tools:['HTML, CSS and JavaScript','A small open-source QR code generator (MIT licence)','GitHub Pages hosting'],
-   sections:{
-     problem:'Every guest asks for the WiFi password, and then it gets read out letter by letter, usually twice. Phones can join a network straight from a QR code, but most people do not know how to make one.',
-     approach:'One short form, a card that updates as you type, and checks for the mistakes that make a printed card useless: a password too short for the security type, stray spaces, or characters that look alike.',
-     features:['Three cards: a fridge card, an A5 card for a frame, and a table tent you fold in half','Print at real size, or save the card as an image to send','Optional heading and welcome line','Choose whether the password is printed on the card or only inside the code','Handles names with punctuation, accents and non-Latin scripts'],
-     howItWorks:'The page writes your details in the WIFI: format that phone cameras understand, escaping the characters that have special meaning in it, and draws the QR code in the browser. Only the look of the card is remembered on the device; the network name and password are not.',
-     aiRole:'Vibecoded with Claude Code. I picked the problem and the card styles; it built the page and the tests.',
-     testing:'Automated checks on the WIFI: text, plus browser tests on desktop and phone in which every QR code the page shows or saves is scanned by a decoder and compared with what was typed.',
-     limitations:'Scanning to join needs a reasonably recent phone: the iPhone camera app, or the camera or Google Lens on most Android phones. If the WiFi password changes, the card has to be made again.'
-   }},
-  {slug:'workphrasing',title:'workphrasing',check:true,featured:1,
-   summary:'Type what you really want to say at work. It reads how you are feeling and writes a calm message you can paste into chat.',
-   type:'Web applications',status:'Working',createdAt:'2026-10-16',updatedAt:'2026-10-17',
-   tags:['Writing','Web App','Works offline'],cover:'assets/workphrasing.jpg',
-   coverAlt:'workphrasing reading a rant as frustrated, because of having to repeat yourself, with a calm chat message to Priya underneath',
-   liveUrl:'https://mridulsaravanan.com/workphrasing/',sourceUrl:'https://github.com/mridulsn/workphrasing',
-   tools:['HTML, CSS and JavaScript, no libraries','A hand-written phrasebook and feeling detector','GitHub Pages hosting'],
-   sections:{
-     problem:'At work the message you want to send and the one you should send are rarely the same, and most work talk now happens in chat, not email. Rewrite tools change the tone, but none of them tell you what you are actually feeling or what to ask for.',
-     approach:'Read the feeling first, then pick the response for it: overwhelmed asks to reprioritise, worried asks for clarity, hurt names the impact and makes one request. Keep chat messages to one to three sentences with one clear ask, and no bare hello or sign-off.',
-     features:['Guesses the feeling behind your message (frustrated, angry, overwhelmed, worried, hurt, disappointed, impatient or confused) and shows the words that gave it away','One tap to correct the guess','Who it is for: teammate, manager, client or group chat','Warm, Straight or Firm, plus a passive-aggressive mode just for laughs','Chat message by default, with an email version on a second tab','Small tips, such as waiting ten minutes before sending an angry one'],
-     howItWorks:'Everything runs in your browser. A set of word patterns spots the situation (repeating yourself, deadlines, credit taken, pay, leave, after-hours messages and about twenty more) and the feeling, and picks what the message is about from a fixed list of everyday work topics, such as the lunch break or the printer. The message is then put together from a phrasebook. Your own words are never copied into the message, so nothing rude slips through, and nothing you type is sent anywhere or saved.',
-     aiRole:'Vibecoded with Claude Code. I set the brief, asked for research into chat etiquette and how to respond to emotions, reviewed every version and asked for changes until the messages felt right.',
-     testing:'Over sixteen thousand automated checks on the phrasebook (length, tone, no rude words, group chats never single anyone out) and browser tests on desktop and phone, including working offline. A relevance check on 60 realistic rants: the share of replies that mention what the rant was about went from 10% to 92% after the 17 October update.',
-     limitations:'The feeling is a guess from keywords, so it can be wrong, which is why it can be changed. English only.',
-     nextSteps:['A mode for replying to a message someone sent you']
-   }},
-  {slug:'mayhemnull',title:'MayhemNull',check:true,featured:1,
-   summary:'A focus and break timer that asks what each session is for, then shows where your time actually went.',
-   type:'Web applications',status:'Working',createdAt:'2026-10-13',updatedAt:'2026-10-13',
-   tags:['Productivity','Web App','AI-assisted'],cover:'assets/mayhemnull.jpg',
-   coverAlt:"MayhemNull's Today screen: a running Focus session with its note, a ring of focus and break time, and the day's sessions",
-   liveUrl:'https://mayhemnull.mridulsaravanan.com',
-   tools:['HTML, CSS and JavaScript in one file','Vercel (hosting and small server functions)','Firebase Authentication and Firestore','Google, GitHub and Discord sign-in'],
-   sections:{
-     problem:'Most trackers count hours but forget what the hours were for. I wanted something I could leave open all day that records two states, Focus and Break, and a short note for every focus session.',
-     approach:'Keep it to two buttons, make the note optional and quick, and make the numbers honest: a day that is still running does not count in averages until it ends.',
-     features:['Focus and Break timers with a note per session, and one-tap recent notes','A ring showing the shift as Focus and Break','Time per note, history by note, and best hours','Pomodoro timer and stopwatch, kept minimised until opened','Spotify and YouTube players for music while working','Optional sign-in with Google, GitHub or Discord to sync across devices'],
-     howItWorks:'Signed out, everything is stored in the browser. Signed in, a server function on Vercel confirms who you are with the provider and issues a Firebase session; your data is saved as one document only you can read. If two devices change data at the same time, it asks which copy to keep and downloads the other first.',
-     aiRole:'Vibecoded with Claude Code. I set the requirements, reviewed every screen and asked for changes until it worked the way I wanted.',
-     testing:'Automated browser checks for the timers, notes, history, insights, phone layouts and sync between two simulated devices, plus real sign-in tests on the live site.',
-     limitations:'Google sign-in and YouTube search were still being switched on when this was written. Spotify plays 30-second previews unless the listener is logged in to Spotify in the same browser.',
-     nextSteps:['Finish Google sign-in and YouTube search','Let one account connect several sign-in methods']
-   }},
-  {slug:'ruledrift',title:'Ruledrift',check:true,featured:1,
-   summary:'A brain game where nobody tells you the rule, and once you have worked it out, it silently changes.',
-   type:'Web applications',status:'Working',createdAt:'2026-09-04',updatedAt:'2026-09-05',
-   tags:['Game','Web App','AI-assisted'],cover:'assets/ruledrift.jpg',coverAlt:"Ruledrift's home screen with Play, a five-board tutorial, How to play, My report, Achievements and Rule codex",
-   liveUrl:'https://ruledrift.vercel.app',sourceUrl:'https://github.com/mridulsn/ruledrift',
-   tools:['Plain JavaScript modules, no dependencies','Vercel hosting','Offline-first web app'],
-   sections:{
-     problem:'I wanted a short daily game that trains noticing when your own assumption has stopped being true.',
-     approach:'Use the mechanic of the Wisconsin Card Sorting Task: five tiles, a hidden rule, feedback only by right or wrong, and a rule that changes after a few correct answers.',
-     features:['An interactive tutorial that teaches by playing','Five game modes, ranks and achievements','A report on how quickly you adapt after a rule change','Seeded games friends can play separately and compare'],
-     howItWorks:'Every board comes from a seed, so the same seed always produces the same game. That is what lets two people compare results without a server.',
-     testing:'A self-test script checks that every board has exactly one correct answer and that a rule change is never invisible.',
-     whatWorked:'Rebuilding the tutorial after the first version proved too hard to understand on first play.',
-     limitations:'Sign-in on the live game currently does not work: its free database plan paused after a week without visitors.',
-     aiRole:'Vibecoded with an AI coding assistant; I played, criticised and redirected each version.'
-   }},
-  {slug:'chomp',title:'Chomp',check:true,featured:1,
-   summary:'A small maze game on this website: eat the dots, avoid four ghosts, clear the level.',
-   type:'Web applications',status:'Working',createdAt:'2026-10-13',updatedAt:'2026-10-13',
-   tags:['Game','Canvas'],cover:'assets/chomp.jpg',coverAlt:'The Chomp start screen: a dark maze of dots with Click or tap to play',liveUrl:'https://mridulsaravanan.com/play/',
-   tools:['HTML canvas','JavaScript'],
-   sections:{
-     features:['Four ghosts that scatter and chase','Power pellets, lives and faster levels','Keyboard, swipe and on-screen controls; best score kept in the browser'],
-     testing:'Scripted browser tests for eating dots, ghost behaviour, losing a life and clearing a level.'
-   }}
-];
+  function fitNames() {
+    Array.prototype.forEach.call(ul.querySelectorAll('.name'), function (n) {
+      n.style.fontSize = '';
+      var room = n.parentNode.clientWidth - 18, size = parseFloat(getComputedStyle(n).fontSize);
+      while (n.scrollWidth > room && size > 10) { size -= 0.5; n.style.fontSize = size + 'px'; }
+    });
+  }
+  fitNames();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitNames);
+  window.addEventListener('resize', fitNames);
 
-/* Experiment IDEAS from the brief. None has been run as a full experiment;
-   they stay marked "Idea" until results are added. */
-var EXPERIMENTS=[
-  {slug:'repeatability-vs-correctness',title:'Does repeatability mean correctness?',status:'Idea',category:'Consistency and repeatability',
-   summary:'If a model gives the same answer every time, does that make the answer more trustworthy?',
-   method:['Create a fixed set of questions with verifiable answers.','Run each question several times under documented conditions.','Record consistency separately from correctness.','Verify answers manually against reliable references.'],
-   measures:['Answer consistency','Correctness rate','Unsupported claim rate','Abstention rate, if relevant'],relatedFindings:['consistent-is-not-correct']},
-  {slug:'unsupported-evidence',title:'Can a model provide unsupported evidence?',status:'Idea',category:'Hallucinations and unsupported claims',
-   summary:'When asked to justify an answer, does the model give evidence that actually supports its claims?',
-   method:['Prepare questions that require evidence.','Record each answer and any sources cited.','Check whether each source exists and supports the claim.','Categorise the failures.'],
-   measures:['Fabricated source','Real but irrelevant source','Source does not support the claim','Unsupported statement','Uncertainty correctly acknowledged']},
-  {slug:'answer-under-challenge',title:'Does a model change its answer when challenged?',status:'Idea',category:'Sycophancy and response stability',
-   summary:'Does the model keep a well-supported answer when a user disagrees without new evidence?',
-   method:['Prepare prompts with a known, verifiable answer.','Record the first answer.','Challenge it with no new evidence, then with valid counter-evidence.','Judge whether each change of position was justified.'],
-   measures:['Unjustified changes','Justified changes','Answers kept correctly'],relatedFindings:['tests-that-never-fail']},
-  {slug:'language-and-quality',title:'Does language affect output quality?',status:'Idea',category:'Prompt sensitivity',
-   summary:'Does performance change when the same task is given in English and in Hindi?',
-   method:['Prepare equivalent tasks in both languages and check the translations.','Score outputs with the same rubric.','Report translation effects and sample size as limitations.'],
-   measures:['Rubric score per language','Cost per language'],relatedFindings:['hindi-token-cost']},
-  {slug:'when-humans-review',title:'When should a human review an AI output?',status:'Idea',category:'Human-in-the-loop workflows',
-   summary:'Which output characteristics should send an answer to a person instead of being accepted automatically?',
-   method:['Design representative tasks and define risk and ambiguity categories.','Write an accept / review / escalate rubric.','Apply it to examples and study the misses.'],
-   measures:['Review trigger rate','False accepts','False escalations'],relatedFindings:['volume-beats-model-price']}
-];
+  // Tap: the lantern lifts off, then the app opens. Modified clicks open as usual.
+  ul.addEventListener('click', function (e) {
+    var a = e.target.closest('.lantern-link'); if (!a) return;
+    var slug = a.getAttribute('data-slug');
+    try { if (visited.indexOf(slug) < 0) { visited.push(slug); localStorage.setItem('lanterns.visited', JSON.stringify(visited)); } } catch (err) { /* fine */ }
+    if (reduce || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    e.preventDefault();
+    a.parentNode.classList.add('launch');
+    setTimeout(function () { window.location.href = a.href; }, 520);
+  });
+  // Coming back with the browser's back button: put the lantern back
+  window.addEventListener('pageshow', function () {
+    Array.prototype.forEach.call(document.querySelectorAll('.launch'), function (li) { li.classList.remove('launch'); });
+  });
 
-/* Findings from his own small experiments (made-up data, nothing from an
-   employer). The write-ups live in the ai-ops-portfolio repository.
-   Publication dates are not known, so none are shown. */
-/* Kept back for now (he asked for Findings to stay empty): move entries into FINDINGS to publish. */
-var FINDINGS=[];
-var FINDINGS_LATER=[
-  {slug:'tests-that-never-fail',title:'A test that never fails tells you nothing',figure:'4 of 4',category:'AI discoveries',check:true,
-   summary:'My first test suite passed every test and caught nothing. A harder suite made the same model invent facts and change its answer under pressure.',
-   source:'https://github.com/mridulsn/ai-ops-portfolio',relatedExperiments:['answer-under-challenge']},
-  {slug:'consistent-is-not-correct',title:'Consistent is not the same as correct',figure:'5 of 5',category:'AI discoveries',check:true,
-   summary:'Five identical runs at temperature 0 gave the same answer every time, and it was wrong: it halved a total stated in the document.',
-   source:'https://github.com/mridulsn/ai-ops-portfolio',relatedExperiments:['repeatability-vs-correctness']},
-  {slug:'hindi-token-cost',title:'Measure the cost in the languages you actually handle',figure:'5.3\u00d7',category:'Tool comparisons',check:true,
-   summary:'Hindi used 5.3 times the tokens of English for the same message, though it had fewer characters. A process split evenly between the two cost 3.1 times the English-only estimate.',
-   source:'https://github.com/mridulsn/ai-ops-portfolio',relatedExperiments:['language-and-quality']},
-  {slug:'volume-beats-model-price',title:'Ask how many cases it takes off people, not which model is cheapest',figure:'97%',category:'Workflow experiments',check:true,
-   summary:'At 8,000 cases a month, an AI process still paid for itself even if 97% of cases needed a person. Handling more cases was worth up to $3,104 a month; making the model cheaper, at most $96.',
-   source:'https://github.com/mridulsn/ai-ops-portfolio',relatedExperiments:['when-humans-review']}
-];
-
-/* No published notes yet: the Notes page shows topics being explored. */
-var NOTES=[];
-var NOTE_TOPICS_LATER=['AI evaluation rubrics','Test-set design','Hallucination evaluation','Human-in-the-loop design','Model abstention','Prompt sensitivity','Retrieval-augmented generation (RAG)','AI agents and tool use','Model Context Protocol (MCP)','Regression testing for AI systems','Quality assurance for probabilistic outputs','Designing operational review queues'];
-
-/* ================= helpers ================= */
-var $=function(s){return document.querySelector(s);};
-function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function fmtDate(d){if(!d)return '';var x=new Date(d+'T00:00:00');return x.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}
-function slugCls(s){return String(s).toLowerCase().replace(/\s+/g,'-');}
-function badge(s){return '<span class="badge '+slugCls(s)+'">'+esc(s)+'</span>';}
-function tags(t){return t&&t.length?'<div class="tags">'+t.map(function(x){return '<span class="tag">'+esc(x)+'</span>';}).join('')+'</div>':'';}
-function ext(url,label){return '<a href="'+esc(url)+'" target="_blank" rel="noopener">'+esc(label)+'</a>';}
-function checkMark(o){return '';}
-function shot(p,cls){
-  return '<div class="shot'+(cls?' '+cls:'')+'">'+(p.cover?'<img src="'+esc(p.cover)+'" alt="'+esc(p.coverAlt||p.title)+'" loading="lazy">':'<div class="fallback"><span>No screenshot yet</span></div>')+'</div>';
-}
-function projectCard(p,big){
-  return '<article class="card'+(big?' big':'')+'">'+shot(p)+
-    '<div class="body"><div class="meta-row"><span class="kind">Project</span>'+badge(p.status)+'</div>'+
-    '<h3><a href="#/projects/'+p.slug+'" style="text-decoration:none">'+esc(p.title)+'</a>'+checkMark(p)+'</h3><p>'+esc(p.summary)+'</p>'+
-    '<div class="links"><a href="#/projects/'+p.slug+'">View project</a>'+(p.liveUrl?ext(p.liveUrl,'Live demo'):'')+(p.sourceUrl?ext(p.sourceUrl,'Source code'):'')+'</div></div></article>';
-}
-function empty(title,text,action){return '<div class="empty"><b>'+esc(title)+'</b>'+esc(text)+(action?'<div style="margin-top:14px">'+action+'</div>':'')+'</div>';}
-function byUpdated(a,b){return (b.updatedAt||'').localeCompare(a.updatedAt||'');}
-function setTitle(t,d){document.title=t?t+' \u2013 Mridul Saravanan':'Mridul Saravanan \u2013 projects, AI experiments and findings';var m=document.querySelector('meta[name=description]');if(d)m.setAttribute('content',d);}
-
-/* ================= pages ================= */
-function home(){
-  setTitle('', 'Mridul Saravanan explores AI, tests how it behaves, and documents what he learns.');
-  var feat=PROJECTS.filter(function(p){return p.featured;}).sort(byUpdated);
-  var updates=[].concat(
-    PROJECTS.map(function(p){return {d:p.updatedAt,t:p.title,k:'Project',h:'#/projects/'+p.slug};})
-  ).filter(function(u){return u.d;}).sort(function(a,b){return b.d.localeCompare(a.d);}).slice(0,3);
-  return ''+
-  '<div class="hero"><div class="wrap">'+
-    '<div><p class="eyebrow">Projects \u00b7 AI experiments \u00b7 Practical findings</p>'+
-      '<h1>Curious by default. <span>Evidence over assumptions.</span></h1>'+
-      '<p class="lede">I\u2019m an operations professional exploring AI, experimentation, and practical problem-solving. I turn ideas into working apps with AI, investigate how AI models behave, and explore how reliable systems can be designed.</p>'+
-      '<div class="ctas"><a class="btn sun" href="#/projects">Explore projects</a><a class="btn ghost-light" href="#/lab">Visit the AI Lab</a><a class="link" href="'+SITE.github+'" target="_blank" rel="noopener">View GitHub</a></div></div>'+
-    '<figure class="record" style="margin:0" aria-label="A real answer from one of my hallucination tests">'+
-      '<div class="record-top"><span class="mono">Lab record \u00b7 hallucination test</span>'+badge('Observed')+'</div>'+
-      '<div class="record-body"><p class="q">I asked a local model about <b>\u201cSection 14A\u201d</b> of a banking law. There is no such section.</p>'+
-      '<p class="a">\u201cI couldn\u2019t find any information on a \u2018Section 14A\u2019. However, the amendment introduced <mark>Section 43A</mark>, which requires banks to keep a minimum reserve of <mark>5%</mark> for cash deposits over <mark>\u20b950 lakh</mark>.\u201d</p>'+
-      '<div class="verdict"><span aria-hidden="true">\u2715</span><span><b>All three details are invented.</b> They come straight after an honest \u201cI couldn\u2019t find it\u201d, which is what makes them believable.</span></div></div>'+
-      '<figcaption class="record-foot mono">Example from my own testing; made-up question, no employer data.</figcaption></figure>'+
-  '</div></div>'+
-  '<div class="wrap page">'+
-    '<section><div class="sec-head"><h2 class="sec">Featured work</h2><a href="#/projects">All projects</a></div>'+
-      (feat.length?'<div class="featured">'+projectCard(feat[0],true)+feat.slice(1,3).map(function(p){return projectCard(p);}).join('')+'</div>':empty('Nothing featured yet','Mark a project as featured to show it here.'))+'</section>'+
-    '<section><div class="sec-head"><h2 class="sec">Explore the site</h2></div><div class="explore">'+
-      exploreCell('c-build','#/projects','Projects','Apps, tools, and prototypes made with AI.',PROJECTS.length+' project'+(PROJECTS.length===1?'':'s'))+
-      exploreCell('c-lab','#/lab','AI Lab','Experiments exploring model behaviour, reliability, and evaluation.',EXPERIMENTS.length+' experiment ideas')+
-      exploreCell('c-find','#/findings','Findings','Practical discoveries, explanations, and lessons from testing ideas.',FINDINGS.length?FINDINGS.length+' findings':'Coming soon...')+
-      exploreCell('c-note','#/notes','Notes','Concepts I\u2019m learning, useful references, and questions I\u2019m exploring.',NOTES.length?NOTES.length+' notes':'Coming soon...')+
-    '</div></section>'+
-    '<section class="focus"><span class="kind">Current focus</span><p>'+esc(SITE.focus)+'</p></section>'+
-    (updates.length?'<section><div class="sec-head"><h2 class="sec">Latest updates</h2></div><ul class="updates">'+updates.map(function(u){return '<li><a href="'+u.h+'"><span class="d mono">'+fmtDate(u.d)+'</span><span class="kind">'+u.k+'</span><span class="t">'+esc(u.t)+'</span><svg class="go" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></li>';}).join('')+'</ul></section>':'')+
-    '<section>'+contactCta()+'</section>'+
-  '</div>';
-}
-function exploreCell(cls,h,t,s,c){return '<a class="'+cls+'" href="'+h+'"><b>'+t+'</b><span>'+s+'</span><span class="count mono">'+esc(c)+'</span></a>';}
-function contactCta(){
-  return '<div class="cta"><div><h2>Have an interesting problem or idea?</h2><p>I\u2019m always interested in useful tools, thoughtful experiments, and practical ways to improve how work gets done.</p></div>'+
-    '<div class="row"><a class="btn primary" href="mailto:'+SITE.email+'">Email me</a>'+'<a class="btn" href="'+SITE.linkedin+'" target="_blank" rel="noopener">LinkedIn</a><a class="btn" href="'+SITE.github+'" target="_blank" rel="noopener">GitHub</a></div></div>';
-}
-
-var projFilter='All';
-function projects(){
-  setTitle('Projects','Apps, tools and prototypes by Mridul Saravanan.');
-  var used=[];PROJECTS.forEach(function(p){if(used.indexOf(p.type)<0)used.push(p.type);});
-  var showFilters=used.length>1;
-  var list=PROJECTS.filter(function(p){return projFilter==='All'||p.type===projFilter;}).sort(function(a,b){return (b.featured||0)-(a.featured||0)||byUpdated(a,b);});
-  return '<div class="wrap page"><div class="page-head"><h1>Projects</h1><p>Apps, tools and prototypes I\u2019ve vibecoded with AI to solve practical problems, explore ideas, or learn how systems work.</p></div>'+
-    (showFilters?'<div class="filters" role="group" aria-label="Filter projects">'+['All'].concat(used).map(function(c){return '<button data-filter="'+esc(c)+'" aria-pressed="'+(c===projFilter)+'">'+esc(c)+'</button>';}).join('')+'</div>':'')+
-    (list.length?'<div class="grid3">'+list.map(function(p){return projectCard(p);}).join('')+'</div>':empty('No projects in this category yet','Try another filter.'))+
-    '<p class="mono" style="color:var(--muted);margin-top:28px">Status: Idea \u00b7 In progress \u00b7 Prototype (works, not hardened) \u00b7 Working (in real use) \u00b7 Archived</p></div>';
-}
-function project(slug){
-  var p=PROJECTS.filter(function(x){return x.slug===slug;})[0];if(!p)return notFound();
-  setTitle(p.title,p.summary);var s=p.sections||{};
-  var sec=function(h,v){if(!v||(Array.isArray(v)&&!v.length))return '';return '<h2>'+h+'</h2>'+(Array.isArray(v)?'<ul>'+v.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>':'<p>'+esc(v)+'</p>');};
-  var rel=FINDINGS.filter(function(f){return (p.relatedFindings||[]).indexOf(f.slug)>=0;});
-  return '<div class="wrap page"><div class="crumbs mono"><a href="#/projects">Projects</a> / '+esc(p.title)+'</div>'+
-  '<div class="detail"><div><div class="page-head" style="margin-bottom:14px"><h1>'+esc(p.title)+checkMark(p)+'</h1></div><p class="lead">'+esc(p.summary)+'</p>'+
-    
-    (p.cover?'<div class="hero-shot"><img src="'+esc(p.cover)+'" alt="'+esc(p.coverAlt||p.title)+'"></div>':'')+
-    '<div class="prose">'+sec('The problem',s.problem)+sec('The idea',s.approach)+sec('What it does',s.features)+sec('How it works',s.howItWorks)+sec('AI\u2019s role',s.aiRole)+sec('Testing',s.testing)+sec('What worked',s.whatWorked)+sec('What didn\u2019t work',s.limitations)+sec('What I learned',s.lessonsLearned)+sec('Next steps',s.nextSteps)+'</div>'+
-    (rel.length?'<div class="related"><span class="kind">Related</span><ul>'+rel.map(function(f){return '<li><a href="#/findings/'+f.slug+'">'+esc(f.title)+'</a></li>';}).join('')+'</ul></div>':'')+
-  '</div><aside class="aside" aria-label="Project details"><dl>'+
-    '<dt class="mono">Status</dt><dd>'+badge(p.status)+'</dd>'+
-    '<dt class="mono">Type</dt><dd>'+esc(p.type)+'</dd>'+
-    (p.updatedAt?'<dt class="mono">Updated</dt><dd>'+fmtDate(p.updatedAt)+'</dd>':'')+
-    (p.tools&&p.tools.length?'<dt class="mono">Tools</dt><dd>'+p.tools.map(esc).join('<br>')+'</dd>':'')+
-  '</dl>'+tags(p.tags)+'<div class="links" style="flex-direction:column;gap:8px">'+(p.liveUrl?ext(p.liveUrl,'Open live demo'):'')+(p.sourceUrl?ext(p.sourceUrl,'View source code'):'')+'</div></aside></div></div>';
-}
-
-function lab(){
-  setTitle('AI Lab','Small, structured experiments into how AI systems behave.');
-  return '<div class="wrap page"><div class="page-head"><span class="kind lab">AI Lab</span><h1>The AI Lab</h1><p>Small, structured experiments into how AI systems behave. I test specific questions, document the method, inspect failures, and share what the evidence supports\u2014including uncertainty and limitations.</p></div>'+
-    '<div class="callout">Everything below is an <b>experiment idea</b>, not a finished experiment. Results appear here only after an experiment has been run and written up. Related small findings are linked where they exist.</div>'+
-    '<div class="rows">'+EXPERIMENTS.map(function(e){return '<a class="row-item" href="#/lab/'+e.slug+'"><div><span class="kind lab">'+esc(e.category)+'</span><h3 style="margin-top:8px">'+esc(e.title)+'</h3><p>'+esc(e.summary)+'</p></div><div class="side">'+badge(e.status)+'</div></a>';}).join('')+'</div></div>';
-}
-function experiment(slug){
-  var e=EXPERIMENTS.filter(function(x){return x.slug===slug;})[0];if(!e)return notFound();
-  setTitle(e.title,e.summary);
-  var rel=FINDINGS.filter(function(f){return (e.relatedFindings||[]).indexOf(f.slug)>=0;});
-  return '<div class="wrap page"><div class="crumbs mono"><a href="#/lab">AI Lab</a> / '+esc(e.title)+'</div>'+
-  '<div class="detail"><div><div class="page-head" style="margin-bottom:14px"><h1>'+esc(e.title)+'</h1></div><p class="lead">'+esc(e.summary)+'</p>'+
-    '<div class="callout">Status: <b>Idea</b>. This experiment has not been run. There are no results yet, so none are shown.</div>'+
-    '<div class="prose"><h2>Question</h2><p>'+esc(e.summary)+'</p><h2>Planned method</h2><ol>'+e.method.map(function(m){return '<li>'+esc(m)+'</li>';}).join('')+'</ol>'+
-    '<h2>What it would measure</h2><ul>'+e.measures.map(function(m){return '<li>'+esc(m)+'</li>';}).join('')+'</ul>'+
-    '<h2>Results</h2><p>Not run yet.</p></div>'+
-    (rel.length?'<div class="related"><span class="kind">Related finding</span><ul>'+rel.map(function(f){return '<li><a href="#/findings/'+f.slug+'">'+esc(f.title)+'</a></li>';}).join('')+'</ul></div>':'')+
-  '</div><aside class="aside" aria-label="Experiment details"><dl><dt class="mono">Status</dt><dd>'+badge(e.status)+'</dd><dt class="mono">Topic</dt><dd>'+esc(e.category)+'</dd></dl></aside></div></div>';
-}
-
-function findings(){
-  setTitle('Findings','Notes from testing, comparing, and investigating.');
-  return '<div class="wrap page"><div class="page-head"><span class="kind find">Findings</span><h1>Findings</h1><p>Notes from testing, comparing, and investigating. Some are small discoveries; others become full experiments or projects.</p></div>'+
-    (FINDINGS.length?'<div class="rows">'+FINDINGS.map(function(f){return '<a class="row-item finding-row" href="#/findings/'+f.slug+'"><div class="figure-num">'+esc(f.figure)+'</div><div><span class="kind find">'+esc(f.category)+'</span><h3 style="margin-top:8px">'+esc(f.title)+'</h3><p>'+esc(f.summary)+'</p></div><div class="side"></div></a>';}).join('')+'</div>'
-     :'<div class="empty find"><div class="glyph" aria-hidden="true">F</div><b>Coming soon...</b></div>')+'</div>';
-}
-function finding(slug){
-  var f=FINDINGS.filter(function(x){return x.slug===slug;})[0];if(!f)return notFound();
-  setTitle(f.title,f.summary);
-  var rel=EXPERIMENTS.filter(function(e){return (f.relatedExperiments||[]).indexOf(e.slug)>=0;});
-  return '<div class="wrap page"><div class="crumbs mono"><a href="#/findings">Findings</a> / '+esc(f.title)+'</div>'+
-  '<div class="detail"><div><div class="figure-num" style="font-size:3rem;margin-bottom:10px">'+esc(f.figure)+'</div><div class="page-head" style="margin-bottom:14px"><h1>'+esc(f.title)+checkMark(f)+'</h1></div>'+
-    '<div class="prose"><h2>What I noticed</h2><p>'+esc(f.summary)+'</p><h2>Context and method</h2><p>A small experiment with made-up data on a model I ran myself. The full method, prompts and numbers are in the write-up.</p>'+
-    '<h2>Read the write-up</h2><p>'+ext(f.source,'ai-ops-portfolio on GitHub')+'</p></div>'+
-    (rel.length?'<div class="related"><span class="kind">Possible next experiment</span><ul>'+rel.map(function(e){return '<li><a href="#/lab/'+e.slug+'">'+esc(e.title)+'</a></li>';}).join('')+'</ul></div>':'')+
-  '</div><aside class="aside"><dl><dt class="mono">Category</dt><dd>'+esc(f.category)+'</dd><dt class="mono">Data</dt><dd>Made up for the test</dd></dl></aside></div></div>';
-}
-
-function notes(){
-  setTitle('Notes','An evolving collection of concepts, ideas and references.');
-  return '<div class="wrap page"><div class="page-head"><span class="kind note">Notes</span><h1>Notes &amp; Digital Garden</h1><p>An evolving collection of concepts I\u2019m learning, ideas I\u2019m exploring, useful references, and lessons from things that did not work the first time.</p></div>'+
-    (NOTES.length?'':'<div class="empty note"><div class="glyph" aria-hidden="true">N</div><b>Coming soon...</b></div>')+'</div>';
-}
-
-function about(sub){
-  setTitle('About','About Mridul Saravanan - coming soon.');
-  var html='<div class="wrap page"><div class="page-head"><h1>About</h1></div>'+
-    '<div class="empty about"><div class="glyph" aria-hidden="true">A</div><b>Coming soon...</b></div>'+
-    '<section id="contact"><div class="sec-head"><h2 class="sec">Let\u2019s connect</h2></div><div class="about-cta"><div><p>Interested in a project, an experiment, or a practical problem worth exploring? Feel free to reach out.</p><p class="mono" style="margin-top:10px">'+esc(SITE.email)+'</p></div>'+
-      '<div class="row" style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn sun" href="mailto:'+SITE.email+'">Email me</a><a class="btn ghost-light" href="'+SITE.linkedin+'" target="_blank" rel="noopener">LinkedIn</a><a class="btn ghost-light" href="'+SITE.github+'" target="_blank" rel="noopener">GitHub</a></div></div></section></div>';
-  if(sub==='contact')setTimeout(function(){var c=document.getElementById('contact');if(c)c.scrollIntoView();},0);
-  return html;
-}
-
-function now(){
-  setTitle('Now','What Mridul is working on now.');
-  return '<div class="wrap page"><div class="page-head"><h1>Now</h1><p class="mono">Last updated '+fmtDate(SITE.nowUpdated)+'</p></div>'+
-    '<div class="two"><div class="prose"><h2 style="margin-top:0">Currently exploring</h2><ul><li>AI Operations and output quality</li><li>Evaluation test sets and scoring rubrics</li><li>Human-in-the-loop workflows</li><li>AI-assisted applications and practical tools</li></ul></div>'+
-    '<div class="prose"><h2 style="margin-top:0">Currently working on</h2><ul><li><a href="#/projects/mayhemnull">MayhemNull</a>: finishing sign-in and YouTube search</li></ul><h2>Next up</h2><ul><li>Run the first full experiment from the <a href="#/lab">AI Lab</a></li></ul></div></div></div>';
-}
-
-function search(q){
-  setTitle('Search');
-  q=(q||'').trim();var ql=q.toLowerCase();
-  var items=[].concat(
-    PROJECTS.map(function(p){return {k:'Project',t:p.title,s:p.summary,h:'#/projects/'+p.slug,x:(p.title+' '+p.summary+' '+(p.tags||[]).join(' ')).toLowerCase()};}),
-    EXPERIMENTS.map(function(e){return {k:'Experiment idea',t:e.title,s:e.summary,h:'#/lab/'+e.slug,x:(e.title+' '+e.summary+' '+e.category).toLowerCase()};}),
-    FINDINGS.map(function(f){return {k:'Finding',t:f.title,s:f.summary,h:'#/findings/'+f.slug,x:(f.title+' '+f.summary+' '+f.category).toLowerCase()};}),
-    NOTES.map(function(n){return {k:'Note',t:n.title,s:n.summary,h:'#/notes/'+n.slug,x:(n.title+' '+n.summary).toLowerCase()};})
-  );
-  var hits=ql?items.filter(function(i){return ql.split(/\s+/).every(function(w){return i.x.indexOf(w)>=0;});}):[];
-  return '<div class="wrap page"><div class="page-head"><h1>Search</h1><p>Projects, experiment ideas, findings and notes.</p></div>'+
-    '<form class="search-box" id="searchForm" role="search"><label for="q" class="skip" style="position:absolute;left:-999px">Search</label><input id="q" name="q" type="search" placeholder="Try \u201crepeatability\u201d or \u201cgame\u201d" value="'+esc(q)+'" autocomplete="off"><button class="btn primary" type="submit">Search</button></form>'+
-    (ql?(hits.length?'<div class="rows">'+hits.map(function(h){return '<a class="row-item" href="'+h.h+'"><div><span class="kind">'+esc(h.k)+'</span><h3 style="margin-top:8px">'+esc(h.t)+'</h3><p>'+esc(h.s)+'</p></div></a>';}).join('')+'</div>':empty('Nothing found for \u201c'+q+'\u201d','Try a shorter word, or browse the sections from the menu.')):'')+'</div>';
-}
-
-function notFound(){setTitle('Not found');return '<div class="wrap page">'+empty('That page does not exist','It may have moved.','<a class="btn" href="#/">Go home</a>')+'</div>';}
-
-/* ================= router ================= */
-var ROUTES={'':home,'projects':projects,'lab':lab,'findings':findings,'notes':notes,'about':about,'now':now,'search':search};
-function render(){
-  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(document.startViewTransition&&!reduce&&render.ready){document.startViewTransition(paint);}else paint();
-  render.ready=true;
-}
-function paint(){
-  var h=(location.hash||'#/').replace(/^#\/?/,''),parts=h.split('?'),path=parts[0].split('/'),qs=new URLSearchParams(parts[1]||'');
-  var top=path[0]||'',sub=path[1];
-  var html;
-  if(top==='projects'&&sub)html=project(sub);
-  else if(top==='lab'&&sub)html=experiment(sub);
-  else if(top==='findings'&&sub)html=finding(sub);
-  else if(top==='search')html=search(qs.get('q'));
-  else if(top==='about')html=about(sub);
-  else if(ROUTES.hasOwnProperty(top))html=ROUTES[top]();
-  else html=notFound();
-  var main=$('#main');main.innerHTML=html;
-  document.querySelectorAll('#nav a').forEach(function(a){var t=a.getAttribute('href').replace(/^#\/?/,'');a.toggleAttribute('aria-current',t===top);if(t===top)a.setAttribute('aria-current','page');});
-  $('#nav').classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');
-  if(sub!=='contact')window.scrollTo(0,0);
-  bind();
-  main.querySelectorAll('img').forEach(function(im){if(im.complete)return;im.classList.add('fade');im.addEventListener('load',function(){im.classList.add('loaded');},{once:true});});
-}
-function bind(){
-  document.querySelectorAll('[data-filter]').forEach(function(b){b.onclick=function(){projFilter=b.getAttribute('data-filter');render();};});
-  var f=$('#searchForm');if(f){f.onsubmit=function(e){e.preventDefault();location.hash='#/search?q='+encodeURIComponent($('#q').value);};var q=$('#q');if(q&&!q.value)q.focus();}
-}
-$('#menuBtn').onclick=function(){var n=$('#nav'),o=n.classList.toggle('open');this.setAttribute('aria-expanded',o?'true':'false');};
-$('#copy').textContent='\u00a9 '+new Date().getFullYear()+' Mridul Saravanan';
-if(location.hash==='#play')location.replace('play/');
-window.addEventListener('hashchange',render);
-render();
+  /* ---------- The far sky: stars and distant lanterns rising, on one clock ---------- */
+  var cv = document.getElementById('sky'), ctx = cv.getContext('2d');
+  var W = 0, H = 0, dpr = 1, stars = [], far = [], sprite = null;
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function makeSprite() {
+    var s = document.createElement('canvas'), n = 64; s.width = s.height = n;
+    var g = s.getContext('2d');
+    var grd = g.createRadialGradient(n / 2, n / 2, 0, n / 2, n / 2, n / 2);
+    grd.addColorStop(0, 'rgba(255,236,190,1)'); grd.addColorStop(.18, 'rgba(255,190,90,.95)');
+    grd.addColorStop(.42, 'rgba(255,140,50,.35)'); grd.addColorStop(1, 'rgba(255,120,40,0)');
+    g.fillStyle = grd; g.fillRect(0, 0, n, n);
+    return s;
+  }
+  function seed() {
+    var area = W * H;
+    stars = []; far = [];
+    var ns = Math.round(area / 9000), nf = Math.round(Math.min(90, Math.max(26, area / 22000)));
+    for (var i = 0; i < ns; i++) stars.push({ x: Math.random() * W, y: Math.random() * H * .8, r: rnd(.4, 1.2), ph: rnd(0, 6.28) });
+    for (var j = 0; j < nf; j++) {
+      var z = Math.pow(Math.random(), 1.6);          // most lanterns are far away
+      far.push({ x: Math.random() * W, y0: Math.random() * H, z: z, ph: rnd(0, 6.28), sz: 6 + z * 26 });
+    }
+  }
+  function resize() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = window.innerWidth + 80; H = window.innerHeight + 340;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    seed();
+  }
+  function draw(t) {
+    var breath = t / 7000 * 6.283;                     // the shared clock (--breath: 7s)
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      ctx.globalAlpha = .35 + .35 * Math.sin(breath * 2 + s.ph);
+      ctx.fillStyle = '#e9e6ff';
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill();
+    }
+    for (var j = 0; j < far.length; j++) {
+      var f = far[j];
+      var speed = 6 + f.z * 22;                        // px per second: near ones rise faster
+      var y = ((f.y0 - t / 1000 * speed) % (H + 80) + (H + 80)) % (H + 80) - 40;
+      var x = f.x + Math.sin(breath + f.ph) * (4 + f.z * 10);
+      var a = .25 + f.z * .55;
+      ctx.globalAlpha = a * (.85 + .15 * Math.sin(breath * 5 + f.ph));
+      ctx.drawImage(sprite, x - f.sz / 2, y - f.sz / 2, f.sz, f.sz);
+    }
+    ctx.globalAlpha = 1;
+  }
+  var raf = 0, px = 0, py = 0, tx = 0, ty = 0;
+  var light = document.getElementById('handlight');
+  if (!reduce && window.matchMedia('(hover: hover)').matches) {
+    window.addEventListener('pointermove', function (e) {
+      tx = (e.clientX / window.innerWidth - .5); ty = (e.clientY / window.innerHeight - .5);
+      light.style.setProperty('--mx', e.clientX + 'px'); light.style.setProperty('--my', e.clientY + 'px');
+      light.classList.add('on');
+    }, { passive: true });
+    document.addEventListener('pointerleave', function () { light.classList.remove('on'); });
+  }
+  function loop(t) {
+    px += (tx - px) * .05; py += (ty - py) * .05;    // eased, so the sky glides rather than jumps
+    var sy = Math.min(window.scrollY, 2000) * -.12;  // far sky moves slower than the page
+    cv.style.transform = 'translate3d(' + (-px * 18).toFixed(2) + 'px,' + (sy - py * 12).toFixed(2) + 'px,0)';
+    draw(t); raf = requestAnimationFrame(loop);
+  }
+  sprite = makeSprite();
+  resize();
+  window.addEventListener('resize', function () { resize(); if (reduce) draw(0); });
+  if (reduce) draw(0);
+  else {
+    raf = requestAnimationFrame(loop);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) cancelAnimationFrame(raf); else raf = requestAnimationFrame(loop);
+    });
+  }
 })();
 </script>
 </body>
