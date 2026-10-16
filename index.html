@@ -361,9 +361,25 @@ var SITE={
 };
 
 var PROJECTS=[
+  {slug:'guestwifi',title:'guestwifi',check:true,featured:1,
+   summary:'Type your WiFi name and password once and print a card with a QR code. Guests scan it with their phone camera and they are on.',
+   type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
+   tags:['Home','Web App','Print'],cover:'assets/guestwifi.jpg',
+   coverAlt:'A guestwifi fridge card: a Guest WiFi heading, a QR code, the network name Sharma Home 5G and its password',
+   liveUrl:'https://mridulsaravanan.com/guestwifi/',sourceUrl:'https://github.com/mridulsn/guestwifi',
+   tools:['HTML, CSS and JavaScript','A small open-source QR code generator (MIT licence)','GitHub Pages hosting'],
+   sections:{
+     problem:'Every guest asks for the WiFi password, and then it gets read out letter by letter, usually twice. Phones can join a network straight from a QR code, but most people do not know how to make one.',
+     approach:'One short form, a card that updates as you type, and checks for the mistakes that make a printed card useless: a password too short for the security type, stray spaces, or characters that look alike.',
+     features:['Three cards: a fridge card, an A5 card for a frame, and a table tent you fold in half','Print at real size, or save the card as an image to send','Optional heading and welcome line','Choose whether the password is printed on the card or only inside the code','Handles names with punctuation, accents and non-Latin scripts'],
+     howItWorks:'The page writes your details in the WIFI: format that phone cameras understand, escaping the characters that have special meaning in it, and draws the QR code in the browser. Only the look of the card is remembered on the device; the network name and password are not.',
+     aiRole:'Vibecoded with Claude Code. I picked the problem and the card styles; it built the page and the tests.',
+     testing:'Automated checks on the WIFI: text, plus browser tests on desktop and phone in which every QR code the page shows or saves is scanned by a decoder and compared with what was typed.',
+     limitations:'Scanning to join needs a reasonably recent phone: the iPhone camera app, or the camera or Google Lens on most Android phones. If the WiFi password changes, the card has to be made again.'
+   }},
   {slug:'workphrasing',title:'workphrasing',check:true,featured:1,
    summary:'Type what you really want to say at work. It reads how you are feeling and writes a calm message you can paste into chat.',
-   type:'Web applications',status:'Working',createdAt:'2026-10-16',updatedAt:'2026-10-16',
+   type:'Web applications',status:'Working',createdAt:'2026-10-16',updatedAt:'2026-10-17',
    tags:['Writing','Web App','Works offline'],cover:'assets/workphrasing.jpg',
    coverAlt:'workphrasing reading a rant as frustrated, because of having to repeat yourself, with a calm chat message to Priya underneath',
    liveUrl:'https://mridulsaravanan.com/workphrasing/',sourceUrl:'https://github.com/mridulsn/workphrasing',
@@ -372,9 +388,9 @@ var PROJECTS=[
      problem:'At work the message you want to send and the one you should send are rarely the same, and most work talk now happens in chat, not email. Rewrite tools change the tone, but none of them tell you what you are actually feeling or what to ask for.',
      approach:'Read the feeling first, then pick the response for it: overwhelmed asks to reprioritise, worried asks for clarity, hurt names the impact and makes one request. Keep chat messages to one to three sentences with one clear ask, and no bare hello or sign-off.',
      features:['Guesses the feeling behind your message (frustrated, angry, overwhelmed, worried, hurt, disappointed, impatient or confused) and shows the words that gave it away','One tap to correct the guess','Who it is for: teammate, manager, client or group chat','Warm, Straight or Firm, plus a passive-aggressive mode just for laughs','Chat message by default, with an email version on a second tab','Small tips, such as waiting ten minutes before sending an angry one'],
-     howItWorks:'Everything runs in your browser. A set of word patterns spots the situation (repeating yourself, deadlines, credit taken, left out and others) and the feeling, then the message is put together from a phrasebook. Your own words are never copied into the message, so nothing rude slips through, and nothing you type is sent anywhere or saved.',
+     howItWorks:'Everything runs in your browser. A set of word patterns spots the situation (repeating yourself, deadlines, credit taken, pay, leave, after-hours messages and about twenty more) and the feeling, and picks what the message is about from a fixed list of everyday work topics, such as the lunch break or the printer. The message is then put together from a phrasebook. Your own words are never copied into the message, so nothing rude slips through, and nothing you type is sent anywhere or saved.',
      aiRole:'Vibecoded with Claude Code. I set the brief, asked for research into chat etiquette and how to respond to emotions, reviewed every version and asked for changes until the messages felt right.',
-     testing:'Over sixteen thousand automated checks on the phrasebook (length, tone, no rude words, group chats never single anyone out) and browser tests on desktop and phone, including working offline.',
+     testing:'Over sixteen thousand automated checks on the phrasebook (length, tone, no rude words, group chats never single anyone out) and browser tests on desktop and phone, including working offline. A relevance check on 60 realistic rants: the share of replies that mention what the rant was about went from 10% to 92% after the 17 October update.',
      limitations:'The feeling is a guess from keywords, so it can be wrong, which is why it can be changed. English only.',
      nextSteps:['A mode for replying to a message someone sent you']
    }},
