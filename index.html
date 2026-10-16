@@ -361,6 +361,22 @@ var SITE={
 };
 
 var PROJECTS=[
+  {slug:'worryshredder',title:'worryshredder',check:true,featured:1,
+   summary:'Write down what is worrying you, then shred it, burn it or float it away on a balloon. A small ritual for letting go.',
+   type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
+   tags:['Wellbeing','Web App','Animation'],cover:'assets/worryshredder.jpg',
+   coverAlt:'A worry about a Monday presentation written on lined paper, burning away from the bottom in pixel flames',
+   liveUrl:'https://mridulsaravanan.com/worryshredder/',sourceUrl:'https://github.com/mridulsn/worryshredder',
+   tools:['HTML, CSS and JavaScript, no libraries','Canvas animations','GitHub Pages hosting'],
+   sections:{
+     problem:'Worries go round and round when they stay in your head. Writing one down and then physically throwing it away is an old trick, but you do not always have paper and a bin to hand.',
+     approach:'Keep it to one box, three ways to let go and one button. Make the moment of letting go feel satisfying, then say one short, kind thing that never promises everything will be fine.',
+     features:['Shred, burn or float away, each with its own pixel animation','A short kind line afterwards, and a count of worries let go','A plain fade instead of the animation when the device asks for reduced motion','If a worry mentions self-harm or not wanting to live, a gentle reply with the Tele-MANAS helpline instead of a playful one'],
+     howItWorks:'The worry is drawn onto a canvas as a note on lined paper, then cut into strips, burnt cell by cell from the bottom, or folded small and lifted by a balloon. The words are not kept anywhere; only the count is remembered on the device.',
+     aiRole:'Vibecoded with Claude Code. I picked the idea and the cosy pixel-paper look; it built the animations and the tests.',
+     testing:'Automated checks on the kind lines, text wrapping and the helpline trigger, plus browser tests on desktop and phone for all three animations, reduced motion, and that the worry text never reaches storage.',
+     limitations:'It is a small ritual, not therapy. The helpline check looks for words, so it will not catch everything.'
+   }},
   {slug:'guestwifi',title:'guestwifi',check:true,featured:1,
    summary:'Type your WiFi name and password once and print a card with a QR code. Guests scan it with their phone camera and they are on.',
    type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
