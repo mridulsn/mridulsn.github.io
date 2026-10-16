@@ -361,6 +361,22 @@ var SITE={
 };
 
 var PROJECTS=[
+  {slug:'fridgecook',title:'fridgecook',check:true,featured:1,
+   summary:'Tick what is in your kitchen and see what you can cook right now, or with just one more thing from the shop.',
+   type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
+   tags:['Cooking','Web App','Home'],cover:'assets/fridgecook.jpg',
+   coverAlt:'fridgecook results: a shopping tip, then dishes you can make right now such as masala khichdi, tomato rice and paneer paratha',
+   liveUrl:'https://mridulsaravanan.com/fridgecook/',sourceUrl:'https://github.com/mridulsn/fridgecook',
+   tools:['HTML, CSS and JavaScript, no libraries','About a hundred dishes written for this project','GitHub Pages hosting'],
+   sections:{
+     problem:'The question at the end of a long day is not what is the best recipe, but what can I make with what is already here. Recipe sites start from the dish, not from your shelves.',
+     approach:'Start from the kitchen: tick what you have, and sort dishes into right now, one more thing, and two more things. Then point out the single item from the shop that would open up the most options.',
+     features:['About a hundred Indian and everyday dishes with short steps','Right now, with one more thing, and with two more things','Which single item would unlock the most dishes','Filters for veg, veg with eggs and Jain, and a time limit','Each recipe shows what you have, what you need and what is optional'],
+     howItWorks:'Each dish lists what it needs and what is optional; salt, oil and everyday spices are assumed. The page compares that with your ticks, ranks dishes by how much of your kitchen they use, and remembers your ticks on the device.',
+     aiRole:'Vibecoded with Claude Code. I set the idea and the filters; it wrote the dish list, the matching and the tests.',
+     testing:'Over 1,400 checks: every ingredient is on the kitchen list, every dish can be reached, the veg and Jain rules hold, and sample kitchens give the expected dishes. Plus browser tests on desktop and phone.',
+     limitations:'The dishes are home-style starting points, not chef recipes, and quantities are left to taste.'
+   }},
   {slug:'readforme',title:'readforme',check:true,featured:1,
    summary:'Paste any text and hear it read aloud slowly, with each word lit up as it is spoken, in print as big as you need.',
    type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
