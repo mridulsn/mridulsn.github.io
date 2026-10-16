@@ -361,6 +361,23 @@ var SITE={
 };
 
 var PROJECTS=[
+  {slug:'workphrasing',title:'workphrasing',check:true,featured:1,
+   summary:'Type what you really want to say at work. It reads how you are feeling and writes a calm message you can paste into chat.',
+   type:'Web applications',status:'Working',createdAt:'2026-10-16',updatedAt:'2026-10-16',
+   tags:['Writing','Web App','Works offline'],cover:'assets/workphrasing.jpg',
+   coverAlt:'workphrasing reading a rant as frustrated, because of having to repeat yourself, with a calm chat message to Priya underneath',
+   liveUrl:'https://mridulsaravanan.com/workphrasing/',sourceUrl:'https://github.com/mridulsn/workphrasing',
+   tools:['HTML, CSS and JavaScript, no libraries','A hand-written phrasebook and feeling detector','GitHub Pages hosting'],
+   sections:{
+     problem:'At work the message you want to send and the one you should send are rarely the same, and most work talk now happens in chat, not email. Rewrite tools change the tone, but none of them tell you what you are actually feeling or what to ask for.',
+     approach:'Read the feeling first, then pick the response for it: overwhelmed asks to reprioritise, worried asks for clarity, hurt names the impact and makes one request. Keep chat messages to one to three sentences with one clear ask, and no bare hello or sign-off.',
+     features:['Guesses the feeling behind your message (frustrated, angry, overwhelmed, worried, hurt, disappointed, impatient or confused) and shows the words that gave it away','One tap to correct the guess','Who it is for: teammate, manager, client or group chat','Warm, Straight or Firm, plus a passive-aggressive mode just for laughs','Chat message by default, with an email version on a second tab','Small tips, such as waiting ten minutes before sending an angry one'],
+     howItWorks:'Everything runs in your browser. A set of word patterns spots the situation (repeating yourself, deadlines, credit taken, left out and others) and the feeling, then the message is put together from a phrasebook. Your own words are never copied into the message, so nothing rude slips through, and nothing you type is sent anywhere or saved.',
+     aiRole:'Vibecoded with Claude Code. I set the brief, asked for research into chat etiquette and how to respond to emotions, reviewed every version and asked for changes until the messages felt right.',
+     testing:'Over sixteen thousand automated checks on the phrasebook (length, tone, no rude words, group chats never single anyone out) and browser tests on desktop and phone, including working offline.',
+     limitations:'The feeling is a guess from keywords, so it can be wrong, which is why it can be changed. English only.',
+     nextSteps:['A mode for replying to a message someone sent you']
+   }},
   {slug:'mayhemnull',title:'MayhemNull',check:true,featured:1,
    summary:'A focus and break timer that asks what each session is for, then shows where your time actually went.',
    type:'Web applications',status:'Working',createdAt:'2026-10-13',updatedAt:'2026-10-13',
