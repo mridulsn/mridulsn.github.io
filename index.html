@@ -361,6 +361,22 @@ var SITE={
 };
 
 var PROJECTS=[
+  {slug:'packlist',title:'packlist',check:true,featured:1,
+   summary:'Tell it the trip, the days, the weather and who is going. It makes a packing checklist with quantities, ready to tick off.',
+   type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
+   tags:['Travel','Web App','Checklist'],cover:'assets/packlist.jpg',
+   coverAlt:'A packlist checklist for a Goa trip in a green Game Boy style screen, with six items ticked and a progress bar',
+   liveUrl:'https://mridulsaravanan.com/packlist/',sourceUrl:'https://github.com/mridulsn/packlist',
+   tools:['HTML, CSS and JavaScript, no libraries','A hand-written set of packing rules','GitHub Pages hosting'],
+   sections:{
+     problem:'Packing lists online are either generic or written for someone else's trip. The things that actually get forgotten depend on the trip: the PNR for a train, a plug adapter abroad, enough diapers for a baby, lower berths for grandparents.',
+     approach:'Ask only what changes the list: kind of trip, days, weather, how you travel, who is coming and what you plan to do. Then work out quantities, so the list says ten pairs of socks rather than just socks.',
+     features:['Seven kinds of trip, including weddings and pilgrimages','Quantities per person, with clothes planned around one wash on longer trips','Sections for babies, kids and older travellers only when they are coming','Abroad: passport, visa, adapter, currency and a local SIM','Tick off, add your own items, save lists, print, or copy as text for WhatsApp'],
+     howItWorks:'A set of plain rules turns the trip details into items and counts, for example about seven diapers a day plus spares, or one jacket each in mild weather and full winter layers in the cold. Lists and ticks are saved on the device.',
+     aiRole:'Vibecoded with Claude Code. I set the brief and the Game Boy look; it wrote the packing rules and the tests.',
+     testing:'A golden set of ten real trips, from Goa and a Jaipur wedding to London and Dubai with a baby, with items that must and must not appear and exact quantities: 1,697 checks. Plus browser tests on desktop and phone.',
+     limitations:'The rules are general; visa and airline rules differ by trip, so check them for yours.'
+   }},
   {slug:'worryshredder',title:'worryshredder',check:true,featured:1,
    summary:'Write down what is worrying you, then shred it, burn it or float it away on a balloon. A small ritual for letting go.',
    type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
