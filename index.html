@@ -361,6 +361,22 @@ var SITE={
 };
 
 var PROJECTS=[
+  {slug:'choreboss',title:'choreboss',check:true,featured:1,
+   summary:'Family chores as a weekly boss fight. Every chore is a hit on this week’s boss; beat it together and claim the reward.',
+   type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
+   tags:['Family','Web App','Game'],cover:'assets/choreboss.jpg',
+   coverAlt:'A pixel monster called Sir Sticky Spill with its health bar part drained, and a reward of pizza night',
+   liveUrl:'https://mridulsaravanan.com/choreboss/',sourceUrl:'https://github.com/mridulsn/choreboss',
+   tools:['HTML, CSS and JavaScript, no libraries','GitHub Pages hosting'],
+   sections:{
+     problem:'Chore charts work for about a week. Children lose interest in ticking boxes, and points systems quietly favour whoever is oldest.',
+     approach:'Make it a shared goal instead of a competition: one boss a week that the whole family fights together, with a reward the family chooses. Keep it fair so the youngest can top the scoreboard too.',
+     features:['A new pixel boss every Monday with health that scales with the family','Tap who did it, then what they did','Tougher chores hit harder, and younger players get a bonus','Scoreboard with streaks and levels','Undo, and a backup file to move to another device'],
+     howItWorks:'Each chore has an effort from one to five; damage is effort times five times an age bonus, frozen at the moment the chore is logged so later edits never rewrite history. Weeks run Monday to Sunday on the device clock, and everything is kept on the device.',
+     aiRole:'Vibecoded with Claude Code. I picked the idea and the Game Boy look; it built the game rules and the tests.',
+     testing:'Checks on week boundaries, the fairness bonus, streaks, undo and safe import of backups, plus browser tests on desktop and phone including a backup and restore round trip.',
+     limitations:'It runs on one device at a time; to share between phones, move a backup file across.'
+   }},
   {slug:'fridgecook',title:'fridgecook',check:true,featured:1,
    summary:'Tick what is in your kitchen and see what you can cook right now, or with just one more thing from the shop.',
    type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
