@@ -361,6 +361,22 @@ var SITE={
 };
 
 var PROJECTS=[
+  {slug:'readforme',title:'readforme',check:true,featured:1,
+   summary:'Paste any text and hear it read aloud slowly, with each word lit up as it is spoken, in print as big as you need.',
+   type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
+   tags:['Accessibility','Web App','Speech'],cover:'assets/readforme.jpg',
+   coverAlt:'A letter shown in large amber text on a dark screen, with the sentence being read highlighted and the current word lit up',
+   liveUrl:'https://mridulsaravanan.com/readforme/',sourceUrl:'https://github.com/mridulsn/readforme',
+   tools:['HTML, CSS and JavaScript, no libraries','The browser speech engine (Web Speech API)','GitHub Pages hosting'],
+   sections:{
+     problem:'Long letters, forwarded messages and small print are hard work for tired eyes, and many older people would rather listen than read. Phones can read text aloud, but the settings are buried and it is easy to lose your place.',
+     approach:'One box to paste into and one big button. Read slowly by default, one sentence at a time, show exactly which word is being spoken, and make going back a sentence a single tap.',
+     features:['Reads aloud with the voices already on the device, Indian English first when there is one','Each word lights up as it is spoken','Back and Next by sentence, or tap any sentence to start there','Speed from very slow to fast, and five text sizes','Paste, type or open a text file'],
+     howItWorks:'The text is split into sentences, handling titles such as Dr. and Mr., decimals such as 3.30 and the Hindi full stop, and each sentence is spoken on its own. Word events from the speech engine light up the matching word. Speed, voice and size are remembered on the device; the text is not.',
+     aiRole:'Vibecoded with Claude Code. I picked the problem and the amber terminal look; it built the reader and the tests.',
+     testing:'Checks on sentence and word splitting and voice choice, plus browser tests on desktop and phone that swap in a stand-in speech engine, so highlighting, pause, back, next, speed and voice are checked exactly.',
+     limitations:'Voices and word highlighting depend on the device and browser; some voices do not report words, and then only the sentence is highlighted.'
+   }},
   {slug:'packlist',title:'packlist',check:true,featured:1,
    summary:'Tell it the trip, the days, the weather and who is going. It makes a packing checklist with quantities, ready to tick off.',
    type:'Web applications',status:'Working',createdAt:'2026-10-17',updatedAt:'2026-10-17',
