@@ -7,7 +7,7 @@
 <meta name="description" content="Hi, I'm Mridul. This is my page of ideas and works I've vibecoded.">
 <meta property="og:title" content="Mridul Saravanan">
 <meta property="og:description" content="My page of ideas and works I've vibecoded.">
-<meta property="og:image" content="https://mridulsaravanan.com/assets/me.png">
+<meta property="og:image" content="https://mridulsaravanan.com/assets/me-og.jpg">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#07060f">
 <link rel="icon" href="assets/me.png" type="image/png">
@@ -77,8 +77,8 @@ svg.i { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-widt
 /* ---------- hello ---------- */
 main { position: relative; z-index: 1; }
 .hero { text-align: center; padding: 9vh 24px 0; }
-.me { width: 88px; height: 88px; display: block; margin: 0 auto 18px; filter: drop-shadow(0 12px 30px rgba(0, 0, 0, .45)); animation: float 7s ease-in-out infinite; }
-@keyframes float { 50% { transform: translateY(-7px) rotate(2deg); } }
+.me { width: 112px; height: 112px; display: block; margin: 0 auto 20px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px rgba(255, 255, 255, .14), 0 0 0 6px color-mix(in srgb, var(--lilac) 35%, transparent), 0 14px 34px rgba(0, 0, 0, .5); animation: float 7s ease-in-out infinite; }
+@keyframes float { 50% { transform: translateY(-6px); } }
 h1 { margin: 0; font: 400 clamp(60px, 10vw, 96px)/.95 var(--serif); letter-spacing: -.02em; text-wrap: balance; }
 h1 em { font-style: italic; color: var(--lilac); }
 .hello { max-width: 32em; margin: 22px auto 0; color: var(--muted); font-size: clamp(16px, 1.4vw, 19px); text-wrap: pretty; }
@@ -158,7 +158,7 @@ footer { position: relative; z-index: 1; text-align: center; padding: 14vh 24px 
   .bar .who { font-size: 21px; }
   .bar nav .txt, .bar nav .sep { display: none; }
   .hero { padding-top: 7vh; }
-  .me { width: 76px; height: 76px; }
+  .me { width: 96px; height: 96px; }
   .head { flex-direction: column; gap: 6px; padding: 0 16px; }
   .stage { perspective: none; padding: 0 16px; margin-top: 24px; }
   .wall { grid-template-columns: 1fr 1fr; gap: 12px; transform: none !important; }
@@ -196,7 +196,7 @@ footer { position: relative; z-index: 1; text-align: center; padding: 14vh 24px 
 
 <main id="top">
   <section class="hero">
-    <img class="me" src="assets/me.png" alt="" width="88" height="88">
+    <img class="me" src="assets/me-photo.jpg" alt="Mridul Saravanan" width="112" height="112">
     <h1>Mridul <em>Saravanan</em></h1>
     <p class="hello">Hi, I'm <b>Mridul</b>, and this is my portfolio page: my page of ideas and works I've vibecoded. Hope it's to your liking!</p>
   </section>
